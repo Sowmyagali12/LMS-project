@@ -1,31 +1,59 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-const CourseCard = ({ id, title, instructor, duration, level, image, price }) => {
+// Components
+import Navbar from './components/navbar';
+import Footer from './components/footer';
+
+// Pages
+import AboutUs from './pages/AboutUs';
+import HomePage from './pages/HomePage';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
+import ChangePassword from './pages/ChangePassword';
+import ContactUs from './pages/ContactUs';
+import Courses from './pages/Courses';
+// import CourseRegistration from './pages/CourseRegistration'; // Commented if unused
+import PaymentPage from './pages/PaymentPage';
+import CourseLanding from './pages/CourseLanding';
+
+function App() {
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-      <img
-        className="w-full h-40 object-cover"
-        src={image}
-        alt={title}
-      />
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-1 text-blue-700">{title}</h3>
-        <p className="text-sm text-gray-600">👩‍🏫 Instructor: {instructor}</p>
-        <p className="text-sm text-gray-600">🕒 Duration: {duration}</p>
-        <p className="text-sm text-gray-600">📘 Level: {level}</p>
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-green-600 font-bold text-lg">{price}</span>
-          <Link to={`/courses/${id}`} className="text-blue-600 hover:underline">
-            View Details
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <Router>
+      <Navbar />
 
-export default CourseCard;
+      <main>
+        <Routes>
+          {/* 🌟 Public Routes */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+
+          {/* 🎓 Course Routes */}
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:courseId" element={<CourseLanding />} />
+
+          {/* 💳 Payment Route */}
+          <Route path="/payment/:courseId" element={<PaymentPage />} />
+
+          {/* 🔒 If you later use registration */}
+          {/* <Route path="/course-registration" element={<CourseRegistration />} /> */}
+        </Routes>
+      </main>
+
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;
+
+
 
 
 

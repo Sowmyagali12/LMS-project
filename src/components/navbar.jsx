@@ -19,27 +19,39 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="w-full fixed top-0 left-0 z-50 shadow-md">
+    <header className="w-full top-0 left-0 z-50 shadow-md">
       {/* 🔝 Top bar */}
-      <div className="bg-black text-white text-sm px-6 py-2 flex justify-between items-center">
-        <p>
-          For Enquiry: <span className="font-semibold">📞 +91 9849175588</span>
-        </p>
-        <a
-          href="https://youtube.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded-full text-white font-semibold text-xs flex items-center gap-1"
-        >
-          <i className="fab fa-youtube"></i> Our Free Tutorials
-        </a>
-      </div>
+     <div className="bg-black text-white text-sm px-4 py-2 flex flex-col md:flex-row md:justify-between md:items-center">
+  {/* Enquiry Section */}
+  <div className="flex items-center justify-center md:justify-start mb-2 md:mb-0">
+    <span className="font-semibold">For Enquiry : +91 9849175588</span>
+  </div>
+
+  {/* YouTube Button */}
+  <div className="flex justify-center md:justify-end">
+    <a
+      href="https://youtube.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded-full text-white font-semibold text-xs flex items-center gap-1"
+    >
+      <i className="fab fa-youtube text-white"></i> Our Free Tutorials
+    </a>
+  </div>
+</div>
+
 
       {/* 🧭 Main Navbar */}
       <div className="bg-white py-4 px-6 flex items-center justify-between md:px-12">
-        <RouterLink to="/" className="text-2xl font-bold text-[#C75DFF]">
-          Logo
+
+        <RouterLink to="/" className="flex items-center">
+          <img
+            src="http://technohubtrainings.in/img/technohub-logo.png"
+            alt="TechnoHub Logo"
+            className="h-14 w-auto object-contain bg-cover"
+          />
         </RouterLink>
+
 
         {/* 🔘 Hamburger for Mobile */}
         <button
@@ -54,7 +66,7 @@ const Navbar = () => {
 
         {/* 🔗 Nav Links - Desktop */}
         <nav className="hidden md:flex items-center space-x-6">
-          <RouterLink to="/" className="text-gray-700 hover:text-[#C75DFF]">
+          <RouterLink to="/" className="text-gray-700 hover:text-[#0793d1]">
             Home
           </RouterLink>
 
@@ -62,7 +74,7 @@ const Navbar = () => {
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={toggleDropdown}
-              className="text-gray-700 hover:text-[#C75DFF] flex items-center"
+              className="text-gray-700 hover:text-[#0793d1] flex items-center"
             >
               Services
               <svg
@@ -85,21 +97,21 @@ const Navbar = () => {
                 <Link
                   smooth
                   to="#online-training"
-                  className="block px-4 py-2 text-gray-700 hover:bg-[#f0d7ff]"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#a8dcf3]"
                 >
                   Online Training
                 </Link>
                 <Link
                   smooth
                   to="#classroom-training"
-                  className="block px-4 py-2 text-gray-700 hover:bg-[#f0d7ff]"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#a8dcf3]"
                 >
                   Classroom Training
                 </Link>
                 <Link
                   smooth
                   to="#internships"
-                  className="block px-4 py-2 text-gray-700 hover:bg-[#f0d7ff]"
+                  className="block px-4 py-2 text-gray-700 hover:bg-[#a8dcf3]"
                 >
                   Internships
                 </Link>
@@ -109,26 +121,37 @@ const Navbar = () => {
 
           <RouterLink
             to="/courses"
-            className="text-gray-700 hover:text-[#C75DFF]"
+            className="text-gray-700 hover:text-[#0793d1]"
           >
             Courses Offering
           </RouterLink>
-          <Link to="#aboutus" className="text-gray-700 hover:text-[#C75DFF]">
+
+          <RouterLink to="/aboutus" 
+          className="text-gray-700 hover:text-[#0793d1]">
             About Us
-          </Link>
+          </RouterLink>
+
           <RouterLink
             to="/contactus"
-            className="text-gray-700 hover:text-[#C75DFF]"
+            className="text-gray-700 hover:text-[#0793d1]"
           >
             Contact Us
           </RouterLink>
           <RouterLink
             to="/signup"
-            className="text-[#C75DFF] font-semibold hover:underline"
+            className="text-[#0793d1] font-semibold hover:underline"
           >
             Sign Up
           </RouterLink>
+         
         </nav>
+
+       <img 
+          src="http://technohubtrainings.in/img/aictee-removebg-preview.png"
+          alt="img"
+          className="hidden md:flex h-14 w-auto object-contain bg-cover "          
+        />
+
       </div>
 
       {/* 📱 Mobile Nav Drawer */}
@@ -185,6 +208,7 @@ const Navbar = () => {
           >
             Courses Offering
           </RouterLink>
+
           <RouterLink
             to="/contactus"
             className="block text-gray-700"
@@ -192,9 +216,18 @@ const Navbar = () => {
           >
             Contact Us
           </RouterLink>
+
+          <RouterLink
+            to="/aboutus"
+            className="block text-gray-700"
+            onClick={toggleMobileMenu}
+          >
+            About Us
+          </RouterLink>
+
           <RouterLink
             to="/signup"
-            className="block text-[#C75DFF] font-semibold"
+            className="block text-[#0793d1] font-semibold"
             onClick={toggleMobileMenu}
           >
             Sign Up

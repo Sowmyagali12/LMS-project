@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -97,9 +96,14 @@ const HomePage = () => {
                   {service.title}
                 </h3>
                 <p className="text-gray-700 text-sm leading-relaxed">{service.desc}</p>
-                <button className="mt-4 px-6 py-2 bg-[#0793d1] hover:bg-[rgba(7,148,209,0.91)] text-white rounded transition">
+                <div className='py-5'>
+
+                   <Link to="/contactus" className="mt-4 px-6 py-2 bg-[#0793d1] hover:bg-[rgba(7,148,209,0.91)] text-white rounded transition">
                   Explore More
-                </button>
+                </Link>
+
+                </div>
+               
               </div>
           </section>
 
@@ -247,11 +251,6 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-
-
-
-
 
 
 

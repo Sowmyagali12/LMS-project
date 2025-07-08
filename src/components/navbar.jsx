@@ -146,11 +146,11 @@ const Navbar = () => {
          
         </nav>
 
-       <img 
+{/*        <img 
           src="http://technohubtrainings.in/img/aictee-removebg-preview.png"
           alt="img"
           className="hidden md:flex h-14 w-auto object-contain bg-cover "          
-        />
+        /> */}
 
       </div>
 

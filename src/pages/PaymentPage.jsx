@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import CourseList from "./data/CourseList"; // ✅ adjust path as needed
 
 export default function PaymentPage() {
+  const { courseId } = useParams(); // 🧠 dynamic from route
+  const course = CourseList.find((c) => c.id === courseId); // 🔍 find matching course
+
   const [method, setMethod] = useState("PhonePe");
   const [cardInfo, setCardInfo] = useState({
     name: "",
@@ -19,14 +24,22 @@ export default function PaymentPage() {
     if (method === "Card" && Object.values(cardInfo).some((val) => val.trim() === "")) {
       alert("Please fill all card details.");
     } else {
-      alert("✅ Payment Successful!");
+      alert(`✅ Payment Successful for ${course?.title || "Course"}!`);
     }
   };
 
+  if (!course) {
+    return <div className="text-center py-20 text-red-600 font-bold">❌ Course not found</div>;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4 py-8">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Complete Your Payment</h2>
+
+        <h3 className="text-center text-lg font-semibold text-blue-600 mb-2">
+          🧾 {course.title}
+        </h3>
 
         {/* Payment Method */}
         <div className="mb-4">
@@ -92,12 +105,12 @@ export default function PaymentPage() {
         {/* Amount Section */}
         <div className="border-t pt-4 mt-4">
           <p className="text-gray-600 text-sm">Total Payable</p>
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">₹1098</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">{course.price}</h3>
           <button
             onClick={handlePayment}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300 transform hover:scale-105"
           >
-            Pay ₹1098
+            Pay {course.price}
           </button>
         </div>
       </div>

@@ -18,22 +18,22 @@ const CourseLanding = () => {
 
   return (
     <div className="bg-white text-gray-800">
+
       {/* 📸 Hero Banner */}
-      <div className="w-full bg-gray-100 py-6 flex flex-col items-center">
-        <img
-          src={course.image}
-          alt={`${course.title} Banner`}
-          loading="lazy"
-          className="rounded shadow-md object-cover"
-          style={{ width: '500px', height: 'auto' }}
-        />
+      <div
+  className="w-full h-64 bg-cover bg-center flex items-center justify-center"
+  style={{ backgroundImage: `url("https://i.pinimg.com/736x/b2/de/a6/b2dea6f5519b74635c5e887e99098459.jpg")` }}
+>
+  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white bg-black/20 px-6 py-3 rounded-lg shadow-lg">
+    {course.title}
+  </h1>
       </div>
 
       {/* 🧩 Highlights */}
       <div className="max-w-6xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center px-4">
         <div className="bg-white shadow rounded p-6">
-          <p className="text-indigo-600 font-bold text-lg">🎯 Internship Support</p>
-          <p className="text-gray-600 mt-2">Internship opportunities after training</p>
+          <p className="text-indigo-600 font-bold text-lg">📜 Certification</p>
+          <p className="text-gray-600 mt-2">Certificate of completion provided after course</p>
         </div>
         <div className="bg-white shadow rounded p-6">
           <p className="text-purple-700 font-bold text-lg">📅 Course Duration</p>
@@ -68,6 +68,7 @@ const CourseLanding = () => {
           🛒 Buy the Course
         </Link>
       </div>
+
     </div>
   );
 };

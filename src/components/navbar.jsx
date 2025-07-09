@@ -3,27 +3,18 @@ import { Link as RouterLink } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 
 const Navbar = () => {
-  // State for dropdown and mobile menu visibility
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Simulated login state (replace this with real auth check)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Toggle Services dropdown
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+  const toggleMobileMenu = () => setMenuOpen((prev) => !prev);
 
-  // Toggle mobile nav menu
-  const toggleMobileMenu = () => setMenuOpen(!menuOpen);
-
-  // Logout handler
   const handleLogout = () => {
-    // 🧠 Real apps: Clear tokens/session here
     setIsLoggedIn(false);
     alert("You have been logged out!");
   };
 
-  // Auto-close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
       setDropdownOpen(false);
@@ -104,21 +95,21 @@ const Navbar = () => {
               <div className="absolute top-8 left-0 w-56 bg-white border rounded-lg shadow-lg z-50">
                 <Link
                   smooth
-                  to="#online-training"
+                  to="/#online-training"
                   className="block px-4 py-2 text-gray-700 hover:bg-[#a8dcf3]"
                 >
                   Online Training
                 </Link>
                 <Link
                   smooth
-                  to="#classroom-training"
+                  to="/#classroom-training"
                   className="block px-4 py-2 text-gray-700 hover:bg-[#a8dcf3]"
                 >
                   Classroom Training
                 </Link>
                 <Link
                   smooth
-                  to="#internships"
+                  to="/#internships"
                   className="block px-4 py-2 text-gray-700 hover:bg-[#a8dcf3]"
                 >
                   Internships
@@ -134,7 +125,10 @@ const Navbar = () => {
             Courses Offering
           </RouterLink>
 
-          <RouterLink to="/aboutus" className="text-gray-700 hover:text-[#0793d1]">
+          <RouterLink
+            to="/aboutus"
+            className="text-gray-700 hover:text-[#0793d1]"
+          >
             About Us
           </RouterLink>
 
@@ -145,7 +139,6 @@ const Navbar = () => {
             Contact Us
           </RouterLink>
 
-          {/* 🔁 Conditional Button */}
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
@@ -183,7 +176,7 @@ const Navbar = () => {
             <div className="ml-4 mt-2 space-y-1">
               <Link
                 smooth
-                to="#online-training"
+                to="/#online-training"
                 className="block text-sm text-gray-600"
                 onClick={toggleMobileMenu}
               >
@@ -191,7 +184,7 @@ const Navbar = () => {
               </Link>
               <Link
                 smooth
-                to="#classroom-training"
+                to="/#classroom-training"
                 className="block text-sm text-gray-600"
                 onClick={toggleMobileMenu}
               >
@@ -199,7 +192,7 @@ const Navbar = () => {
               </Link>
               <Link
                 smooth
-                to="#internships"
+                to="/#internships"
                 className="block text-sm text-gray-600"
                 onClick={toggleMobileMenu}
               >
@@ -232,7 +225,6 @@ const Navbar = () => {
             About Us
           </RouterLink>
 
-          {/* 🔁 Conditional Mobile Button */}
           {isLoggedIn ? (
             <button
               onClick={() => {

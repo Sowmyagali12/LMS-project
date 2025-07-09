@@ -20,7 +20,7 @@ const Footer = () => {
       {/* Grid layout for 4 main columns */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         
-        {/* 🏢 1st Column: Logo and About Section */}
+        {/*  1st Column: Logo and About Section */}
         <div>
           <img
             src="http://technohubtrainings.in/img/technohub-logo.png"
@@ -33,7 +33,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* 🔗 2nd Column: Quick Navigation Links */}
+        {/*  2nd Column: Quick Navigation Links */}
         <div>
           <h4 className="text-red-500 font-semibold mb-2 border-b border-red-600 inline-block">
             QUICK LINKS
@@ -47,7 +47,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* 📜 3rd Column: Policy Links */}
+        {/*  3rd Column: Policy Links */}
         <div>
           <h4 className="text-red-500 font-semibold mb-2 border-b border-red-600 inline-block">
             OUR POLICIES
@@ -60,7 +60,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* 📞 4th Column: Contact Information */}
+        {/*  4th Column: Contact Information */}
         <div>
           <h4 className="text-red-500 font-semibold mb-2 border-b border-red-600 inline-block">
             CONTACT US
@@ -97,7 +97,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* 🌐 Social Media Links */}
+      {/*  Social Media Links */}
       <div className="mt-8 text-center">
         <p className="text-red-500 font-bold mb-2">FOLLOW US :</p>
         <div className="flex justify-center gap-4 text-xl text-white">
@@ -110,7 +110,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* 🔚 Bottom Section with Copyright */}
+      {/*  Bottom Section with Copyright */}
       <div className="mt-6 border-t border-gray-700 pt-4 text-center text-xs">
         &copy; {new Date().getFullYear()} TECHNOHUB All Rights Reserved.
       </div>

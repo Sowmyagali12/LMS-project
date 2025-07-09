@@ -15,7 +15,7 @@ const CourseCard = ({ id, title, instructor, duration, level, image, price }) =>
         <p className="text-sm text-gray-600">🕒 Duration: {duration}</p>
         <p className="text-sm text-gray-600">📘 Level: {level}</p>
         <div className="flex justify-between items-center mt-4">
-          <span className="text-green-600 font-bold text-lg">₹{price}</span>
+          <span className="text-green-600 font-bold text-lg">{price}</span>
           <Link to={`/courses/${id}`} className="text-blue-600 hover:underline">
             View Details
           </Link>

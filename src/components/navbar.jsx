@@ -3,12 +3,27 @@ import { Link as RouterLink } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 
 const Navbar = () => {
+  // State for dropdown and mobile menu visibility
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Simulated login state (replace this with real auth check)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Toggle Services dropdown
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  // Toggle mobile nav menu
   const toggleMobileMenu = () => setMenuOpen(!menuOpen);
 
+  // Logout handler
+  const handleLogout = () => {
+    // 🧠 Real apps: Clear tokens/session here
+    setIsLoggedIn(false);
+    alert("You have been logged out!");
+  };
+
+  // Auto-close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
       setDropdownOpen(false);
@@ -20,30 +35,25 @@ const Navbar = () => {
 
   return (
     <header className="w-full top-0 left-0 z-50 shadow-md">
-      {/* 🔝 Top bar */}
-     <div className="bg-black text-white text-sm px-4 py-2 flex flex-col md:flex-row md:justify-between md:items-center">
-  {/* Enquiry Section */}
-  <div className="flex items-center justify-center md:justify-start mb-2 md:mb-0">
-    <span className="font-semibold">For Enquiry : +91 9849175588</span>
-  </div>
-
-  {/* YouTube Button */}
-  <div className="flex justify-center md:justify-end">
-    <a
-      href="https://youtube.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded-full text-white font-semibold text-xs flex items-center gap-1"
-    >
-      <i className="fab fa-youtube text-white"></i> Our Free Tutorials
-    </a>
-  </div>
-</div>
-
+      {/* 🔝 Top Bar */}
+      <div className="bg-black text-white text-sm px-4 py-2 flex flex-col md:flex-row md:justify-between md:items-center">
+        <div className="flex items-center justify-center md:justify-start mb-2 md:mb-0">
+          <span className="font-semibold">For Enquiry : +91 9849175588</span>
+        </div>
+        <div className="flex justify-center md:justify-end">
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded-full text-white font-semibold text-xs flex items-center gap-1"
+          >
+            <i className="fab fa-youtube text-white"></i> Our Free Tutorials
+          </a>
+        </div>
+      </div>
 
       {/* 🧭 Main Navbar */}
       <div className="bg-white py-4 px-6 flex items-center justify-between md:px-12">
-
         <RouterLink to="/" className="flex items-center">
           <img
             src="http://technohubtrainings.in/img/technohub-logo.png"
@@ -52,8 +62,6 @@ const Navbar = () => {
           />
         </RouterLink>
 
-
-        {/* 🔘 Hamburger for Mobile */}
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -64,13 +72,13 @@ const Navbar = () => {
           ☰
         </button>
 
-        {/* 🔗 Nav Links - Desktop */}
+        {/* 💻 Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6">
           <RouterLink to="/" className="text-gray-700 hover:text-[#0793d1]">
             Home
           </RouterLink>
 
-          {/* Dropdown */}
+          {/* Services Dropdown */}
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={toggleDropdown}
@@ -126,8 +134,7 @@ const Navbar = () => {
             Courses Offering
           </RouterLink>
 
-          <RouterLink to="/aboutus" 
-          className="text-gray-700 hover:text-[#0793d1]">
+          <RouterLink to="/aboutus" className="text-gray-700 hover:text-[#0793d1]">
             About Us
           </RouterLink>
 
@@ -137,21 +144,24 @@ const Navbar = () => {
           >
             Contact Us
           </RouterLink>
-          <RouterLink
-            to="/signup"
-            className="text-[#0793d1] font-semibold hover:underline"
-          >
-            Sign Up
-          </RouterLink>
-         
+
+          {/* 🔁 Conditional Button */}
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="text-red-500 font-semibold hover:underline"
+            >
+              Logout
+            </button>
+          ) : (
+            <RouterLink
+              to="/signup"
+              className="text-[#0793d1] font-semibold hover:underline"
+            >
+              Sign Up
+            </RouterLink>
+          )}
         </nav>
-
-{/*        <img 
-          src="http://technohubtrainings.in/img/aictee-removebg-preview.png"
-          alt="img"
-          className="hidden md:flex h-14 w-auto object-contain bg-cover "          
-        /> */}
-
       </div>
 
       {/* 📱 Mobile Nav Drawer */}
@@ -164,14 +174,11 @@ const Navbar = () => {
           >
             Home
           </RouterLink>
-          <div className="border-t border-gray-200"></div>
 
           <details className="group">
             <summary className="text-gray-700 cursor-pointer flex justify-between items-center">
               Services
-              <span className="group-open:rotate-180 transition-transform">
-                ▼
-              </span>
+              <span className="group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <div className="ml-4 mt-2 space-y-1">
               <Link
@@ -225,13 +232,26 @@ const Navbar = () => {
             About Us
           </RouterLink>
 
-          <RouterLink
-            to="/signup"
-            className="block text-[#0793d1] font-semibold"
-            onClick={toggleMobileMenu}
-          >
-            Sign Up
-          </RouterLink>
+          {/* 🔁 Conditional Mobile Button */}
+          {isLoggedIn ? (
+            <button
+              onClick={() => {
+                handleLogout();
+                toggleMobileMenu();
+              }}
+              className="block text-red-500 font-semibold"
+            >
+              Logout
+            </button>
+          ) : (
+            <RouterLink
+              to="/signup"
+              className="block text-[#0793d1] font-semibold"
+              onClick={toggleMobileMenu}
+            >
+              Sign Up
+            </RouterLink>
+          )}
         </div>
       )}
     </header>

@@ -18,6 +18,13 @@ import Courses from './pages/Courses';
 import PaymentPage from './pages/PaymentPage';
 import CourseLanding from './pages/CourseLanding';
 
+import EnrolledCourses from './pages/EnrolledCourses';
+import CourseContent from './pages/CourseContent';
+
+
+
+
+
 function App() {
   return (
     <Router>
@@ -40,6 +47,9 @@ function App() {
 
           {/* 💳 Payment Route */}
           <Route path="/payment/:courseId" element={<PaymentPage />} />
+          <Route path="/dashboard" element={<EnrolledCourses />} />
+          <Route path="/course-content/:courseId" element={<CourseContent />} />
+
 
           {/* 🔒 If you later use registration */}
           {/* <Route path="/course-registration" element={<CourseRegistration />} /> */}
@@ -52,7 +62,6 @@ function App() {
 }
 
 export default App;
-
 
 
 

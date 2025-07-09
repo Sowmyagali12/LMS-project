@@ -1,19 +1,18 @@
 import React from 'react';
 import CourseCard from './CourseCard';
-import CourseList from './data/CourseList'; // ✅ adjust if in another path
-
+import CourseList from './data/CourseList'; 
 const Courses = () => {
   return (
     <div className="bg-white text-gray-800">
       {/* 🔷 Banner Section */}
       <section>
         <div
-          className="w-full h-64 flex flex-col items-center justify-center text-white text-center bg-cover bg-center mb-8 rounded-xl"
+          className="w-full h-64 flex flex-col items-left  px-10 justify-center text-white text-left bg-cover bg-center mb-8 rounded-xl"
           style={{
             backgroundImage: 'url("https://www.ashokitech.in/assets/images/career-banner01.png")',
           }}
         >
-          <h1 className="text-3xl font-bold mb-2 drop-shadow-lg">Software Courses</h1>
+          <h1 className="text-4xl font-bold mb-2 drop-shadow-lg">Software Courses</h1>
           <p className="text-lg drop-shadow-sm">Explore new and trending courses.</p>
         </div>
       </section>
@@ -28,7 +27,6 @@ const Courses = () => {
               title={course.title}
               instructor={course.instructor}
               duration={course.duration}
-              level={course.level}
               image={course.image}
               price={course.price}
             />
@@ -40,6 +38,3 @@ const Courses = () => {
 };
 
 export default Courses;
-
-
-

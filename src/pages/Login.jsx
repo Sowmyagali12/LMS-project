@@ -24,12 +24,18 @@ export default function Login() {
             placeholder="Password"
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-md transition"
-          >
-            Sign In
-          </button>
+         <div>
+  <Link
+    to="/dashboard"
+    className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-md text-center block transition"
+  >
+    Sign In
+  </Link>
+</div>
+
+
+       
+          
         </form>
 
         <div className="flex justify-between w-full max-w-md text-xs mt-4 text-gray-600">

@@ -1,7 +1,43 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Login() {
+  const [ email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:8080/stu/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Invalid credentials');
+      }
+
+    const data = await response.json();
+    const token = data.token; 
+
+
+      if (token) {
+        localStorage.setItem('token', token); 
+        navigate('/dashboard'); 
+      } else {
+        throw new Error('Token not received');
+      }
+    } catch (err) {
+      setError(err.message || 'Login failed');
+    }
+  };
+
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row overflow-hidden">
       {/* 🔐 Login Form Section */}
@@ -13,17 +49,26 @@ export default function Login() {
       >
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">Login to Your Account</h2>
 
-        <form className="w-full max-w-md space-y-4">
+        <form className="w-full max-w-md space-y-4" onSubmit={handleLogin}>
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+
+          {error && <p className="text-red-500 text-xs">{error}</p>}
+
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-md transition"

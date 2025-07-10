@@ -1,28 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CourseList from './data/CourseList';
-
 
 const CourseLanding = () => {
   const { courseId } = useParams();
+  const [course, setCourse] = useState(null);
+  const [error, setError] = useState('');
+  const [bannerImageError, setBannerImageError] = useState(false);
+  const defaultBannerImageUrl = "https://via.placeholder.com/500x250?text=Banner+Not+Available"; 
 
-  // Find course by ID from shared CourseList
-  const course = CourseList.find((c) => c.id === courseId);
+  const handleBannerImageError = ( ) => {
+    setBannerImageError(true);
+  };
 
-  if (!course) {
-    return <div className="text-center py-20 text-red-600 font-semibold">Course Not Found</div>;
-  }
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const token = localStorage.getItem('token');
+console.log('course id : '.courseId);
+      try {
+        const res = `http://localhost:8080/course/course/get/${courseId}`;
+        console.log('api res : ',res);
+        const response = await fetch(`http://localhost:8080/course/course/get/${courseId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        } );
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch course details');
+        }
+
+        const data = await response.json();
+        setCourse(data);
+      } catch (err) {
+        setError(err.message || 'Something went wrong');
+      }
+    };
+
+    fetchCourse();
+  }, [courseId]);
+
+  if (error) return <div className="text-center py-20 text-red-600 font-semibold">{error}</div>;
+  if (!course) return <div className="text-center py-20">Loading...</div>;
 
   return (
     <div className="bg-white text-gray-800">
       {/* Hero Banner */}
       <div className="w-full bg-gray-100 py-6 flex flex-col items-center">
         <img
-          src={course.image}
-          alt={`${course.title} Banner`}
+          src={bannerImageError ? defaultBannerImageUrl : `https://via.placeholder.com/500x250?text=${encodeURIComponent(course.courseName )}`}
+          alt={`${course.courseName} Banner`}
           loading="lazy"
           className="rounded shadow-md object-cover"
           style={{ width: '500px', height: 'auto' }}
+          onError={handleBannerImageError}
         />
       </div>
 
@@ -33,25 +63,22 @@ const CourseLanding = () => {
           <p className="text-gray-600 mt-2">Internship opportunities after training</p>
         </div>
         <div className="bg-white shadow rounded p-6">
-          <p className="text-purple-700 font-bold text-lg">📅 Course Duration</p>
-          <p className="text-gray-600 mt-2">{course.duration}</p>
+          <p className="text-purple-700 font-bold text-lg">📅 Duration</p>
+          <p className="text-gray-600 mt-2">{course.courseDuration}</p>
         </div>
         <div className="bg-white shadow rounded p-6">
-          <p className="text-red-600 font-bold text-lg">💰 Course Price</p>
-          <p className="text-gray-600 mt-2">{course.price}</p>
+          <p className="text-red-600 font-bold text-lg">💰 Price</p>
+          <p className="text-gray-600 mt-2">₹{course.courseFee}</p>
         </div>
+        <div className="bg-white shadow rounded p-6"></div>
+        <p className="text-indigo-600 font-bold text-lg"> About Course</p>
+        <p className="text-gray-600 mt-2"> {course.description}</p>
       </div>
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4 pb-10 px-4">
         <a
-          href={course.demoLink}
-          className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 font-semibold shadow text-center"
-        >
-          🎥 Watch Demo
-        </a>
-        <a
-          href={course.pdfLink}
+          href={course.pdfContentUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 font-semibold shadow text-center"

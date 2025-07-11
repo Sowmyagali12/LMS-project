@@ -1,41 +1,20 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { FaGift } from 'react-icons/fa';
 
 export default function Login() {
-  const [ email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [showGift, setShowGift] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError('');
+    setShowGift(true);
 
-    try {
-      const response = await fetch('http://localhost:8080/stu/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-
-      if (!response.ok) {
-        throw new Error('Invalid credentials');
-      }
-
-    const data = await response.json();
-    const token = data.token; 
-
-
-      if (token) {
-        localStorage.setItem('token', token); 
-        navigate('/dashboard'); 
-      } else {
-        throw new Error('Token not received');
-      }
-    } catch (err) {
-      setError(err.message || 'Login failed');
-    }
+    // Delay navigation by 2.5 seconds after showing gift
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 2500);
   };
 
   return (
@@ -49,38 +28,51 @@ export default function Login() {
       >
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">Login to Your Account</h2>
 
+        {/* 🎁 GIFT CARD SHOWN AFTER SIGN‑IN */}
+        {showGift && (
+          <motion.div
+            className="w-full max-w-md bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-xl shadow-md flex items-center gap-4 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FaGift size={26} />
+            <div>
+            <h3 className="text-lg font-bold">🎉 Login Successful!</h3>
+            <p className="text-sm">Your journey just began — get ready to unlock powerful new skills! 🔓✨</p>
+
+            </div>
+          </motion.div>
+        )}
+
         <form className="w-full max-w-md space-y-4" onSubmit={handleLogin}>
           <input
             type="email"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
 
-          {error && <p className="text-red-500 text-xs">{error}</p>}
+          <div className="flex justify-start text-xs text-gray-600">
+            <Link to="/forgot-password" className="hover:text-blue-500">
+              Forgot Password?
+            </Link>
+          </div>
 
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-md transition"
+            disabled={showGift} // Disable while animation is showing
           >
-            Sign In
+            {showGift ? 'Redirecting...' : 'Sign In'}
           </button>
         </form>
-
-        <div className="flex justify-between w-full max-w-md text-xs mt-4 text-gray-600">
-          <Link to="/forgot-password" className="hover:text-blue-500">Forgot Password?</Link>
-          <Link to="/change-password" className="hover:text-blue-500">Change Password?</Link>
-        </div>
       </motion.div>
 
       {/* ✨ Signup CTA Section */}

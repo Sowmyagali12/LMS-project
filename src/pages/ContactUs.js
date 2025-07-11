@@ -69,9 +69,6 @@ const ContactForm = () => {
         <div className="phone-group">
           <select>
             <option>India (+91)</option>
-            <option>USA (+1)</option>
-            <option>UK (+44)</option>
-            <option>Canada (+1)</option>
           </select>
           <input type="tel" placeholder="Enter Phone Number" required />
         </div>

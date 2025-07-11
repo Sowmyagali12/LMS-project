@@ -85,11 +85,12 @@ const HomePage = () => {
               }`}
             >
               {/* 📷 Image */}
-              <img
-                src={service.img}
-                alt={service.title}
-                className="w-full md:w-1/2 rounded-xl object-cover"
-              />
+            <img
+  src={service.img}
+  alt={service.title}
+  className="w-full max-w-md md:max-w-lg rounded-xl object-cover"
+/>
+
 
               {/* 📄 Text Content */}
               <div className="md:w-1/2">
@@ -97,10 +98,18 @@ const HomePage = () => {
                   {service.title}
                 </h3>
                 <p className="text-gray-700 text-sm leading-relaxed">{service.desc}</p>
-                <button className="mt-4 px-6 py-2 bg-[#0793d1] hover:bg-[rgba(7,148,209,0.91)] text-white rounded transition">
-                  Explore More
-                </button>
-              </div>
+              
+
+              <div className="py-5">
+                <Link
+                  to="/contactus"
+                  className="text-[#0793d1] hover:underline font-medium transition"
+                >
+                  Contact Us
+              </Link>
+            </div>
+               
+            </div>
           </section>
 
 
@@ -110,10 +119,6 @@ const HomePage = () => {
           ))}
         </div>
       </section>
-      
-
-
-
 
 
       {/* Career Value Section */}
@@ -147,8 +152,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-
 
 
        {/* OUR TRAINING FEATURES SECTION */}

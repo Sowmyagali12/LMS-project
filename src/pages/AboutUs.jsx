@@ -1,4 +1,3 @@
- // src/pages/AboutUs.jsx
 import React from "react";
 
 const AboutUs = () => {
@@ -7,7 +6,7 @@ const AboutUs = () => {
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-gray-600 mb-10">About Technohub</h2>
 
-        {/* Who We Are */}
+        
         <div className="mb-12">
           <p className="text-gray-700 max-w-4xl mx-auto text-left mb-5">
             Welcome to <strong>Technohub</strong>, where we help people gain the knowledge and skills needed to 
@@ -25,7 +24,6 @@ const AboutUs = () => {
               and <strong>personalized support</strong>, we’re here to help you reach your goals and advance your career.
             </p>
         </div>
-
 
       </div>
     </section>

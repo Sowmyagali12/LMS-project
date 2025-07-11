@@ -1,79 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CourseCard from './CourseCard';
-import { useNavigate } from 'react-router-dom';
+import CourseList from './data/CourseList';
 
 const Courses = () => {
-  const [courses, setCourses] = useState([]);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const token = localStorage.getItem('token');
-
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-
-      try {
-        const response = await fetch('http://localhost:8080/course/get', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-
-        if (!response.ok) {
-          if (response.status === 401 || response.status === 403) {
-            throw new Error('Unauthorized or token expired. Please login again.');
-          }
-          throw new Error('Failed to fetch courses');
-        }
-
-        const data = await response.json();
-        console.log('response data : ',data)
-        setCourses(data);
-      } catch (err) {
-        setError(err.message || 'Something went wrong');
-      }
-    };
-
-    fetchCourses();
-  }, [navigate]);
-
   return (
     <div className="bg-white text-gray-800">
-      {/* 🔷 Banner Section */}
+      {/* 🎓 Banner Section */}
       <section>
         <div
-          className="w-full h-64 flex flex-col items-center justify-center text-white text-center bg-cover bg-center mb-8 rounded-xl"
+          className="w-full h-64 flex flex-col justify-center px-10 text-white bg-cover bg-center mb-8 rounded-xl"
           style={{
-            backgroundImage: 'url("https://www.ashokitech.in/assets/images/career-banner01.png")',
+            backgroundImage:
+              'url("https://www.ashokitech.in/assets/images/career-banner01.png")',
           }}
         >
-          <h1 className="text-3xl font-bold mb-2 drop-shadow-lg">Software Courses</h1>
+          <h1 className="text-4xl font-bold mb-2 drop-shadow-lg">Software Courses</h1>
           <p className="text-lg drop-shadow-sm">Explore new and trending courses.</p>
         </div>
       </section>
 
-      {/* 📚 Courses Grid Section */}
-      <section className="px-10 py-10">
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-
+      {/* 📚 Courses Grid */}
+      <section className="px-6 sm:px-10 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {courses.map((course) => (
+          {CourseList.map((course) => (
             <CourseCard
-              // key={course.courseId}
+              key={course.id}
               courseId={course.courseId}
               courseName={course.courseName}
               courseFee={course.courseFee}
               courseDuration={course.courseDuration}
-              courseSilybus={course.courseSilybus}
+              courseSyllabus={course.courseSyllabus}
               description={course.description}
-              pdfContentUrl={course.pdfContentUrl}
+              image={course.image}
+              demoLink={course.demoLink}
             />
           ))}
         </div>

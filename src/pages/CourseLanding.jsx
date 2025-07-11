@@ -1,66 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import CourseList from './data/CourseList';
 
 const CourseLanding = () => {
   const { courseId } = useParams();
-  const [course, setCourse] = useState(null);
-  const [error, setError] = useState('');
-  const [bannerImageError, setBannerImageError] = useState(false);
-  const defaultBannerImageUrl = "https://via.placeholder.com/500x250?text=Banner+Not+Available"; 
 
-  const handleBannerImageError = ( ) => {
-    setBannerImageError(true);
-  };
+  // 🔍 Find course using correct property
+  const course = CourseList.find((c) => c.courseId === courseId);
 
-  useEffect(() => {
-    const fetchCourse = async () => {
-      const token = localStorage.getItem('token');
-console.log('course id : '.courseId);
-      try {
-        const res = `http://localhost:8080/course/course/get/${courseId}`;
-        console.log('api res : ',res);
-        const response = await fetch(`http://localhost:8080/course/course/get/${courseId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        } );
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch course details');
-        }
-
-        const data = await response.json();
-        setCourse(data);
-      } catch (err) {
-        setError(err.message || 'Something went wrong');
-      }
-    };
-
-    fetchCourse();
-  }, [courseId]);
-
-  if (error) return <div className="text-center py-20 text-red-600 font-semibold">{error}</div>;
-  if (!course) return <div className="text-center py-20">Loading...</div>;
+  if (!course) {
+    return (
+      <div className="text-center py-20 text-red-600 font-semibold">
+        🚫 Course Not Found
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white text-gray-800">
       {/* Hero Banner */}
-      <div className="w-full bg-gray-100 py-6 flex flex-col items-center">
-        <img
-          src={bannerImageError ? defaultBannerImageUrl : `https://via.placeholder.com/500x250?text=${encodeURIComponent(course.courseName )}`}
-          alt={`${course.courseName} Banner`}
-          loading="lazy"
-          className="rounded shadow-md object-cover"
-          style={{ width: '500px', height: 'auto' }}
-          onError={handleBannerImageError}
-        />
+      <div
+        className="w-full h-64 bg-cover bg-center flex items-center justify-center"
+        style={{
+          backgroundImage: `url("https://i.pinimg.com/736x/b2/de/a6/b2dea6f5519b74635c5e887e99098459.jpg")`,
+        }}
+      >
+        <h1 className="text-4xl font-bold text-white bg-black/30 px-8 py-3 rounded-lg shadow-lg">
+          {course.courseName}
+        </h1>
       </div>
 
-      {/* Highlights */}
+      {/* Highlights Section */}
       <div className="max-w-6xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center px-4">
         <div className="bg-white shadow rounded p-6">
-          <p className="text-indigo-600 font-bold text-lg">🎯 Internship Support</p>
-          <p className="text-gray-600 mt-2">Internship opportunities after training</p>
+          <p className="text-indigo-600 font-bold text-lg">📜 Certification Included</p>
+          <p className="text-gray-600 mt-2">Get certified after course completion</p>
         </div>
         <div className="bg-white shadow rounded p-6">
           <p className="text-purple-700 font-bold text-lg">📅 Duration</p>
@@ -70,27 +44,51 @@ console.log('course id : '.courseId);
           <p className="text-red-600 font-bold text-lg">💰 Price</p>
           <p className="text-gray-600 mt-2">₹{course.courseFee}</p>
         </div>
-        <div className="bg-white shadow rounded p-6"></div>
-        <p className="text-indigo-600 font-bold text-lg"> About Course</p>
-        <p className="text-gray-600 mt-2"> {course.description}</p>
+      </div>
+
+      {/* About Section */}
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow mt-10 rounded">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          About {course.courseName}
+        </h2>
+        <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+          {course.description}
+        </p>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4 pb-10 px-4">
-        <a
-          href={course.pdfContentUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 font-semibold shadow text-center"
-        >
-          📄 Download PDF
-        </a>
-        <a
-          href="/course-registration"
+      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8 pb-10 px-4">
+        {/* Watch Demo - only if demoLink exists */}
+        {course.demoLink && (
+          <a
+            href={course.demoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 font-semibold shadow text-center"
+          >
+            🎥 Watch Demo
+          </a>
+        )}
+
+        {/* Download PDF */}
+        {course.courseSyllabus && (
+          <a
+            href={course.courseSyllabus}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 font-semibold shadow text-center"
+          >
+            📄 Download PDF
+          </a>
+        )}
+
+        {/* Payment Link */}
+        <Link
+          to={``}
           className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 font-semibold shadow text-center"
         >
           🛒 Buy the Course
-        </a>
+        </Link>
       </div>
     </div>
   );

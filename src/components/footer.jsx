@@ -51,7 +51,7 @@ const Footer = () => {
     <footer className="bg-[#444444] text-[#fff] pt-12 pb-4 px-6 md:px-20 text-sm">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         
-        {/* 1. Logo + About */}
+        {/*  Logo + About */}
         <div>
           <img
             src="http://technohubtrainings.in/img/technohub-logo.png"
@@ -66,7 +66,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* 2. Quick Links */}
+        {/* Quick Links */}
         <div>
           <h4 className="text-red-500 font-semibold mb-2 border-b border-red-600 inline-block">
             QUICK LINKS
@@ -80,7 +80,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* 3. Contact Us */}
+        {/* Contact Us */}
         <div>
           <h4 className="text-red-500 font-semibold mb-2 border-b border-red-600 inline-block">
             CONTACT US

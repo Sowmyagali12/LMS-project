@@ -1,152 +1,113 @@
 import React, { useState } from "react";
 
-export default function CreatePassword() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+export default function ChangePassword() {
+  const [form, setForm] = useState({
+    email: "",
+    oldPassword: "",
+    newPassword: "",
+  });
+
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!password || !confirmPassword) {
+    if (!form.email || !form.oldPassword || !form.newPassword) {
       setMessage("⚠ Please fill in all fields.");
-    } else if (password !== confirmPassword) {
-      setMessage("❌ Passwords do not match.");
-    } else {
-      setMessage("✅ Password updated successfully!");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/stu/change-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      
+        body: JSON.stringify(form),
+      });
+
+
+      const data = await response.json();
+      console.log("Server response:", data);
+
+      if (response.ok) {
+        setMessage("✅ Password changed successfully!");
+        setForm({ email: "", oldPassword: "", newPassword: "" });
+      } else {
+        setMessage(`❌ ${data.message || "Password change failed."}`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setMessage("❌ Server error. Please try again later.");
     }
   };
 
   return (
-    <div>
-      <style>{`
-        .password-wrapper {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: linear-gradient(135deg, #c3ecf7, #f8d1e0);
-          font-family: 'Segoe UI', sans-serif;
-        }
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-pink-100 p-6">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">🔒 Change Password</h2>
 
-        .password-box {
-          background: linear-gradient(145deg, #ffffff, #f2f2f2);
-          padding: 40px 30px;
-          border-radius: 25px;
-          width: 100%;
-          max-width: 420px;
-          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-          text-align: center;
-          border: 2px solid #fff;
-        }
+        {message && (
+          <div
+            className={`mb-4 text-sm font-medium p-3 rounded ${
+              message.includes("✅")
+                ? "bg-green-100 text-green-800 border border-green-300"
+                : "bg-red-100 text-red-800 border border-red-300"
+            }`}
+          >
+            {message}
+          </div>
+        )}
 
-        .password-box h2 {
-          font-size: 28px;
-          font-weight: 700;
-          color: #333;
-          margin-bottom: 24px;
-          text-shadow: 1px 1px #ddd;
-        }
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter your email"
+            />
+          </div>
 
-        .password-box label {
-          font-weight: 600;
-          color: #4b4b4b;
-          margin-bottom: 8px;
-          display: block;
-          font-size: 15px;
-          text-align: left;
-        }
-
-        .password-box input {
-          width: 100%;
-          padding: 12px;
-          margin-bottom: 18px;
-          border: 2px solid #d1d1d1;
-          border-radius: 12px;
-          background-color: #fafafa;
-          font-size: 14px;
-          text-align: center;
-          transition: 0.3s;
-        }
-
-        .password-box input:focus {
-          outline: none;
-          border-color: #58aef7;
-          background-color: #e9f5ff;
-        }
-
-        .password-box button {
-          width: 100%;
-          padding: 12px;
-          background: linear-gradient(to right, #36d1dc, #5b86e5);
-          color: white;
-          font-weight: bold;
-          border: none;
-          border-radius: 12px;
-          font-size: 16px;
-          cursor: pointer;
-          box-shadow: 0 6px 12px rgba(91, 134, 229, 0.3);
-          transition: background 0.4s ease;
-        }
-
-        .password-box button:hover {
-          background: linear-gradient(to right, #5b86e5, #36d1dc);
-        }
-
-        .message {
-          margin: 10px 0;
-          font-size: 14px;
-          font-weight: 600;
-          padding: 8px;
-          border-radius: 8px;
-        }
-
-        .message.success {
-          color: #0f5132;
-          background-color: #d1e7dd;
-          border: 1px solid #badbcc;
-        }
-
-        .message.error {
-          color: #842029;
-          background-color: #f8d7da;
-          border: 1px solid #f5c2c7;
-        }
-      `}</style>
-
-      <div className="password-wrapper">
-        <div className="password-box">
-          <h2>Create New Password</h2>
-          <form onSubmit={handleSubmit}>
-            <label>New Password</label>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">Old Password</label>
             <input
               type="password"
-              value={password}
-              placeholder="Enter new password"
-              onChange={(e) => setPassword(e.target.value)}
+              name="oldPassword"
+              value={form.oldPassword}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter your current password"
             />
+          </div>
 
-            <label>Confirm Password</label>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">New Password</label>
             <input
               type="password"
-              value={confirmPassword}
-              placeholder="Re-enter password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name="newPassword"
+              value={form.newPassword}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter a new password"
             />
+          </div>
 
-            {message && (
-              <p
-                className={`message ${
-                  message.includes("successfully") ? "success" : "error"
-                }`}
-              >
-                {message}
-              </p>
-            )}
-
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"
+          >
+            Change Password
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -1,59 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
 
 const RegisterPage = () => {
   const formRef = useRef(null);
 
-  const [product, setProduct] = useState({
-    name: '',
-    email: '',
-    phoneNumber: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct((prev) => ({ ...prev, [name]: value }));
-  };
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    const res = await fetch('http://localhost:8080/stu/regstration', {
-      method: 'POST', // ✅ method is defined here correctly
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(product),
-    });
-
-    if (!res.ok) {
-      throw new Error('Registration failed.');
-    }
-
-    const data = await res.json();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     Swal.fire({
       title: 'Almost There! 🎉',
       text: 'Check your email for your login password.',
       icon: 'success',
-      confirmButtonColor: '#2563EB',
+      confirmButtonColor: '#2563EB', // Blue
+      confirmButtonText: 'Okay!',
+      background: '#f0f9ff',
+    }).then(() => {
+      formRef.current.reset(); // Reset form
     });
-
-    formRef.current.reset();
-    setProduct({ name: '', email: '', phoneNumber: '' });
-
-  } catch (err) {
-    console.error("Error:", err);
-    Swal.fire({
-      title: 'Oops!',
-      text: err.message,
-      icon: 'error',
-    });
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen bg-[#F3F8FF] flex items-center justify-center px-4 py-10">
@@ -75,9 +40,6 @@ const handleSubmit = async (e) => {
             <label className="block text-gray-700 font-medium mb-2">Full Name</label>
             <input
               type="text"
-              name="name"
-              value={product.name}
-              onChange={handleChange}
               required
               placeholder="Enter your name"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 transition"
@@ -88,9 +50,6 @@ const handleSubmit = async (e) => {
             <label className="block text-gray-700 font-medium mb-2">Email Address</label>
             <input
               type="email"
-              name="email"
-              value={product.email}
-              onChange={handleChange}
               required
               placeholder="Enter your email"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 transition"
@@ -98,14 +57,11 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Contact Number</label>
+            <label className="block text-gray-700 font-medium mb-2">WhatsApp Number</label>
             <input
               type="tel"
-              name="phoneNumber"
-              value={product.phoneNumber}
-              onChange={handleChange}
               required
-              placeholder="Enter your contact number"
+              placeholder="Enter your whatsapp number"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 transition"
             />
           </div>
@@ -132,3 +88,5 @@ const handleSubmit = async (e) => {
 };
 
 export default RegisterPage;
+
+

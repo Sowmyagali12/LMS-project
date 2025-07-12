@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 
 const Users = () => {
   const [users, setUsers] = useState([
-    { id: 1, name: 'Sandeep', email: 'sandeep@gmail.com', role: 'Admin', status: 'pending' },
+    { id: 1, name: 'Sandeep', email: 'sandeep@gmail.com', role: 'Admin', paid: true },
   ]);
 
-  const [form, setForm] = useState({ name: '', email: '', role: '' });
+  const [form, setForm] = useState({ name: '', email: '', role: '', paid: false });
   const [editingId, setEditingId] = useState(null);
 
   const handleInput = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
   };
 
   const handleAddOrUpdate = () => {
@@ -19,26 +20,16 @@ const Users = () => {
       setUsers(users.map((u) => (u.id === editingId ? { ...u, ...form } : u)));
       setEditingId(null);
     } else {
-      const newUser = { id: Date.now(), ...form, status: 'pending' };
+      const newUser = { id: Date.now(), ...form };
       setUsers([...users, newUser]);
     }
 
-    setForm({ name: '', email: '', role: '' });
+    setForm({ name: '', email: '', role: '', paid: false });
   };
 
   const handleEdit = (user) => {
-    setForm({ name: user.name, email: user.email, role: user.role });
+    setForm({ name: user.name, email: user.email, role: user.role, paid: user.paid });
     setEditingId(user.id);
-  };
-
-  const handleDelete = (id) => {
-    setUsers(users.filter((u) => u.id !== id));
-  };
-
-  const handleApprove = (id) => {
-    setUsers(users.map((user) =>
-      user.id === id ? { ...user, status: 'approved' } : user
-    ));
   };
 
   return (
@@ -47,10 +38,14 @@ const Users = () => {
 
       {/* Form */}
       <div className="bg-white p-6 rounded-lg shadow mb-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <input name="name" value={form.name} onChange={handleInput} placeholder="Name" className="border px-4 py-2 rounded" />
           <input name="email" value={form.email} onChange={handleInput} placeholder="Email" className="border px-4 py-2 rounded" />
           <input name="role" value={form.role} onChange={handleInput} placeholder="Course" className="border px-4 py-2 rounded" />
+          <label className="flex items-center gap-2">
+            <input type="checkbox" name="paid" checked={form.paid} onChange={handleInput} />
+            Paid
+          </label>
         </div>
         <button onClick={handleAddOrUpdate} className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">
           {editingId ? 'Update User' : 'Add User'}
@@ -65,7 +60,7 @@ const Users = () => {
               <th className="px-6 py-3">Name</th>
               <th className="px-6 py-3">Email</th>
               <th className="px-6 py-3">Course</th>
-              <th className="px-6 py-3">Status</th>
+              <th className="px-6 py-3">Payment</th>
               <th className="px-6 py-3">Actions</th>
             </tr>
           </thead>
@@ -76,21 +71,14 @@ const Users = () => {
                 <td className="px-6 py-3">{user.email}</td>
                 <td className="px-6 py-3">{user.role}</td>
                 <td className="px-6 py-3">
-                  <span className={`px-3 py-1 rounded text-sm ${user.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                    {user.status}
+                  <span className={`px-3 py-1 rounded text-sm ${user.paid ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}`}>
+                    {user.paid ? 'Paid' : 'Unpaid'}
                   </span>
                 </td>
                 <td className="px-6 py-3 space-x-2">
-                  {user.status === 'pending' && (
-                    <button
-                      onClick={() => handleApprove(user.id)}
-                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded"
-                    >
-                      Approve
-                    </button>
-                  )}
-                  <button onClick={() => handleEdit(user)} className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded">Edit</button>
-                  <button onClick={() => handleDelete(user.id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">Reject</button>
+                  <button onClick={() => handleEdit(user)} className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded">
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))}

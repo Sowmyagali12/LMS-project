@@ -19,7 +19,7 @@ export default function Login() {
 
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row overflow-hidden">
-      {/* 🔐 Login Form Section */}
+      {/* Login Form Section */}
       <motion.div
         className="w-full md:w-1/2 px-8 sm:px-12 md:px-16 py-10 bg-white flex flex-col justify-center items-center text-center"
         initial={{ opacity: 0, x: -50 }}
@@ -28,7 +28,7 @@ export default function Login() {
       >
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">Login to Your Account</h2>
 
-        {/* 🎁 GIFT CARD SHOWN AFTER SIGN‑IN */}
+        {/*  GIFT CARD SHOWN AFTER SIGN‑IN */}
         {showGift && (
           <motion.div
             className="w-full max-w-md bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-xl shadow-md flex items-center gap-4 mb-6"
@@ -75,7 +75,7 @@ export default function Login() {
         </form>
       </motion.div>
 
-      {/* ✨ Signup CTA Section */}
+      {/*  Signup CTA Section */}
       <motion.div
         className="w-full md:w-1/2 bg-gradient-to-br from-[#0793d1] to-[#a2e4fa] flex flex-col items-center justify-center text-white text-center p-8 md:p-16"
         initial={{ opacity: 0, x: 50 }}

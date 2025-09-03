@@ -1,43 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-// Dummy enrolled courses
-const enrolledCourses = [
-  {
-    id: 'python',
-    title: 'Python Mastery',
-    thumbnail: 'https://miro.medium.com/v2/resize:fit:1400/1*fZaf7gR6vVbQUg_9V0wUXQ.jpeg',
-    instructor: 'Mr. Kumar',
-  },
-  {
-    id: 'ui-ux',
-    title: 'UI/UX Design',
-    thumbnail: 'https://cdn.dribbble.com/users/4181881/screenshots/15812735/media/6fbc9ecde01e7b7d89b5295ea7f6f860.png',
-    instructor: 'Ms. Riya',
-  },
-];
+import axios from 'axios';
 
 const EnrolledCourses = () => {
+  const [approvedCourses, setApprovedCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fallbackImage = 'https://via.placeholder.com/400x200?text=No+Image';
+
+  useEffect(() => {
+    const fetchApprovedCourses = async () => {
+      try {
+        
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+          console.warn('No token found. User may not be authenticated.');
+          setApprovedCourses([]);
+          setLoading(false);
+          return;
+        }
+
+        
+        const response = await axios.get('http://localhost:8080/Enrollement/approved/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setApprovedCourses(response.data);
+      } catch (error) {
+        console.error('Error fetching approved courses:', error);
+        setApprovedCourses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchApprovedCourses();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-blue-50 py-10 px-4">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Your Enrolled Courses</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {enrolledCourses.map((course) => (
-          <Link
-            to={`/course-content/${course.id}`}
-            key={course.id}
-            className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-transform hover:scale-105"
-          >
-            <img src={course.thumbnail} alt={course.title} className="h-40 w-full object-cover" />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold text-blue-700">{course.title}</h3>
-              <p className="text-sm text-gray-600">👩‍🏫 {course.instructor}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-10 px-4">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
+        📚 Your Enrolled Courses
+      </h2>
+
+      <section className="mb-12">
+        <h3 className="text-2xl font-semibold text-green-700 mb-4"> Access Granted</h3>
+
+        {loading ? (
+          <p className="text-center text-gray-500">Loading courses...</p>
+        ) : approvedCourses.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {approvedCourses.map((course) => (
+              <Link
+                key={course.courseId}
+                to={`/course-content/${course.courseId}`}
+     className="bg-white shadow-lg rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
+              >
+                <img
+                  src={course.image || fallbackImage}
+                  alt={course.courseName}
+                  className="h-40 w-full object-cover"
+                />
+                <div className="p-4">
+                  <h4 className="text-xl font-semibold text-blue-700">{course.courseName}</h4>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Status:{' '}
+                    <span className="text-green-600 font-medium">Access Approved</span>
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600">
+            You haven t been granted access to any courses yet.
+          </p>
+        )}
+      </section>
     </div>
   );
 };
 
 export default EnrolledCourses;
+ 

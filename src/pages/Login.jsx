@@ -1,50 +1,119 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { FaGift } from 'react-icons/fa';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showGift, setShowGift] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setShowGift(false);
+
+    try {
+      const response = await fetch('http://localhost:8080/stu/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) throw new Error('Invalid credentials');
+
+      const data = await response.json();
+
+      const accessToken = data.accessToken;
+      const refreshToken = data.token;
+      const studentId = data.studentId; // 👈 Make sure your backend sends this
+
+      if (accessToken && refreshToken && studentId) {
+        localStorage.setItem('token', accessToken);         // 🔐 Access token
+        localStorage.setItem('refreshToken', refreshToken); // 🔄 Refresh token
+        localStorage.setItem('studentId', studentId);        // 🧑 Student ID
+
+        setShowGift(true);
+
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 2500);
+      } else {
+        throw new Error('Incomplete login response from server');
+      }
+    } catch (err) {
+      setError(err.message || 'Login failed');
+    }
+  };
+
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row overflow-hidden">
-      {/* 🔐 Login Form Section */}
       <motion.div
         className="w-full md:w-1/2 px-8 sm:px-12 md:px-16 py-10 bg-white flex flex-col justify-center items-center text-center"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">Login to Your Account</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">
+          Login to Your Account
+        </h2>
 
-        <form className="w-full max-w-md space-y-4">
+        {showGift && (
+          <motion.div
+            className="w-full max-w-md bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-xl shadow-md flex items-center gap-4 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FaGift size={26} />
+            <div>
+              <h3 className="text-lg font-bold">🎉 Login Successful!</h3>
+              <p className="text-sm">
+                Your journey just began — get ready to unlock powerful new skills! 🔓✨
+              </p>
+            </div>
+          </motion.div>
+        )}
+
+        <form className="w-full max-w-md space-y-4" onSubmit={handleLogin}>
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-         <div>
-  <Link
-    to="/dashboard"
-    className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-md text-center block transition"
-  >
-    Sign In
-  </Link>
-</div>
+          {error && <p className="text-red-500 text-xs">{error}</p>}
 
-
-       
-          
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-md transition"
+          >
+            Sign In
+          </button>
         </form>
 
         <div className="flex justify-between w-full max-w-md text-xs mt-4 text-gray-600">
-          <Link to="/forgot-password" className="hover:text-blue-500">Forgot Password?</Link>
-          <Link to="/change-password" className="hover:text-blue-500">Change Password?</Link>
+          <Link to="/forgot-password" className="hover:text-blue-500">
+            Forgot Password?
+          </Link>
+          <Link to="/change-password" className="hover:text-blue-500">
+            Change Password?
+          </Link>
         </div>
       </motion.div>
 
-      {/* ✨ Signup CTA Section */}
       <motion.div
         className="w-full md:w-1/2 bg-gradient-to-br from-[#0793d1] to-[#a2e4fa] flex flex-col items-center justify-center text-white text-center p-8 md:p-16"
         initial={{ opacity: 0, x: 50 }}

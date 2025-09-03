@@ -1,30 +1,26 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AdminDashboard from'./pages/AdminDashboard.jsx';
-import Navbar from './components/navbar.jsx';
-import Footer from './components/Footer';
 
+// ✅ Components (match file names exactly)
+import Footer from "./components/foo.jsx";
+import Navbar from "./components/nav.jsx";
 
+// ✅ Pages (based on your `ls src/pages` output)
+import AboutUs from './pages/AboutUs.jsx';
+import HomePage from './pages/HomePage.js';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.js';
+import ForgotPassword from './pages/ForgotPassword.jsx';
+import ChangePassword from './pages/ChangePassword.jsx';
+import ContactUs from './pages/ContactUs.js';
+import Courses from './pages/Courses.jsx';
+import PaymentPage from './pages/PaymentPage.jsx';
+import CourseLanding from './pages/CourseLanding.jsx';
+import EnrolledCourses from './pages/EnrolledCourses.jsx';
+import CourseContent from './pages/CourseContent.jsx';
 
-// Pages
-import AboutUs from './pages/AboutUs';
-import HomePage from './pages/HomePage';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import ForgotPassword from './pages/ForgotPassword';
-import ChangePassword from './pages/ChangePassword';
-import ContactUs from './pages/ContactUs';
-import Courses from './pages/Courses';
-// import CourseRegistration from './pages/CourseRegistration'; // Commented if unused
-import PaymentPage from './pages/PaymentPage';
-import CourseLanding from './pages/CourseLanding';
-
-import EnrolledCourses from './pages/EnrolledCourses';
-import CourseContent from './pages/CourseContent';
-
-
-
-
+// ✅ Newly added file (you need to create this if not exists)
+import AdminDashboard from './pages/AdminDashboard.jsx';
 
 function App() {
   return (
@@ -51,9 +47,8 @@ function App() {
           <Route path="/dashboard" element={<EnrolledCourses />} />
           <Route path="/course-content/:courseId" element={<CourseContent />} />
 
-
-          {/* 🔒 If you later use registration */}
-          {/* <Route path="/course-registration" element={<CourseRegistration />} /> */}
+          {/* 👨‍💼 Admin Route */}
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </main>
 
@@ -63,12 +58,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-

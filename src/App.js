@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminDashboard from'./pages/AdminDashboard.jsx';
+import Navbar from './components/navbar.jsx';
+import Footer from './components/Footer';
 
 
-import Navbar from './components/navbar.jsx'; // correct
-import Footer from './components/footer';
 
 // Pages
 import AboutUs from './pages/AboutUs';

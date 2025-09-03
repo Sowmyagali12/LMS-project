@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// ✅ Correct
-import Footer from "./components/footer.jsx";
-import Navbar from "./components/nav.jsx";
-
+// ✅ Components (match file names exactly)
+import Footer from "./components/Foot.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 // ✅ Pages (based on your `ls src/pages` output)
 import AboutUs from './pages/AboutUs.jsx';

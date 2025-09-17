@@ -1,58 +1,77 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// src/App.js
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// ✅ Components (match file names exactly)
-import Footer from "./components/Foot.jsx";
-import Navbar from "./components/Navbar.jsx";
+// Components
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
-// ✅ Pages (based on your `ls src/pages` output)
-import AboutUs from './pages/AboutUs.jsx';
-import HomePage from './pages/HomePage.js';
-import Login from './pages/Login.jsx';
-import Signup from './pages/Signup.js';
-import ForgotPassword from './pages/ForgotPassword.jsx';
-import ChangePassword from './pages/ChangePassword.jsx';
-import ContactUs from './pages/ContactUs.js';
-import Courses from './pages/Courses.jsx';
-import PaymentPage from './pages/PaymentPage.jsx';
-import CourseLanding from './pages/CourseLanding.jsx';
-import EnrolledCourses from './pages/EnrolledCourses.jsx';
-import CourseContent from './pages/CourseContent.jsx';
+// Pages
+import Dashboard from "./pages/Dashboard";
+import Classroom from "./pages/Classroom";
+import CouponsAvailable from "./pages/CouponsAvailable";
+import ResumeBuilder from "./pages/ResumeBuilder";
+import Internship from "./pages/Internship";
+import Certificate from "./pages/Certificate";
 
-// ✅ Newly added file (you need to create this if not exists)
-import AdminDashboard from './pages/AdminDashboard.jsx';
+// Nested pages
+import JobPortal from "./pages/CouponsAvailable/JobPortal";
+import RecentPlacementCompanies from "./pages/CouponsAvailable/RecentPlacementCompanies";
+
+import CompletedCourses from "./pages/Classroom/CompletedCourses";
+import RunningCourses from "./pages/Classroom/RunningCourses";
+
+import Assignments from "./pages/dashboard/Assignments";
+import Courses from "./pages/dashboard/Courses";
+import Placement from "./pages/dashboard/Placement";
+import Updates from "./pages/dashboard/Updates";
+import WeeklyProgress from "./pages/dashboard/WeeklyProgress";
+
+import "./App.css";
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   return (
     <Router>
-      <Navbar />
+      <div className="app-container flex">
+        {/* Sidebar */}
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-      <main>
-        <Routes>
-          {/* 🌟 Public Routes */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/aboutus" element={<AboutUs />} />
+        <div className="main-content flex-1">
+          {/* Navbar */}
+          <Navbar />
 
-          {/* 🎓 Course Routes */}
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:courseId" element={<CourseLanding />} />
+          {/* Pages */}
+          <div className="page-container p-4">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
 
-          {/* 💳 Payment Route */}
-          <Route path="/payment/:courseId" element={<PaymentPage />} />
-          <Route path="/dashboard" element={<EnrolledCourses />} />
-          <Route path="/course-content/:courseId" element={<CourseContent />} />
+              {/* Dashboard nested pages */}
+              <Route path="/dashboard/assignments" element={<Assignments />} />
+              <Route path="/dashboard/courses" element={<Courses />} />
+              <Route path="/dashboard/placement" element={<Placement />} />
+              <Route path="/dashboard/updates" element={<Updates />} />
+              <Route path="/dashboard/weekly-progress" element={<WeeklyProgress />} />
 
-          {/* 👨‍💼 Admin Route */}
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        </Routes>
-      </main>
+              {/* Classroom nested pages */}
+              <Route path="/classroom" element={<Classroom />} />
+              <Route path="/classroom/completed" element={<CompletedCourses />} />
+              <Route path="/classroom/running" element={<RunningCourses />} />
 
-      <Footer />
+              {/* Coupons available nested */}
+              <Route path="/coupons" element={<CouponsAvailable />} />
+              <Route path="/coupons/job-portal" element={<JobPortal />} />
+              <Route path="/coupons/recent-placement" element={<RecentPlacementCompanies />} />
+
+              {/* Other single pages */}
+              <Route path="/resume-builder" element={<ResumeBuilder />} />
+              <Route path="/internship" element={<Internship />} />
+              <Route path="/certificate" element={<Certificate />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
     </Router>
   );
 }

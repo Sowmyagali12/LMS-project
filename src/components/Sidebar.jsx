@@ -1,121 +1,88 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import MyLogo from "../assets/image.png";
+import { toast } from "react-toastify";
+
 import {
   FaTachometerAlt,
-  FaChalkboardTeacher,
-  FaGift,
-  FaUserEdit,
-  FaBriefcase,
-  FaCertificate,
+  FaBullhorn,
   FaSignOutAlt,
+  FaLaptopCode,
+  FaFileAlt,
+  FaCertificate,
+  FaUniversity,
+  FaCreditCard,
 } from "react-icons/fa";
+import { StudentContext } from "../context/StudentContext";
 
-const menuItems = [
-  {
-    name: "Dashboard",
-    icon: <FaTachometerAlt />,
-    links: [
-      { name: "Weekly Progress", path: "/dashboard/weekly-progress" },
-      { name: "Assignment Status", path: "/dashboard/assignments" },
-      { name: "Placement Portal", path: "/dashboard/placement" },
-      { name: "Updates", path: "/dashboard/updates" },
-      { name: "Courses", path: "/dashboard/courses" },
-    ],
-  },
-  {
-    name: "Classroom",
-    icon: <FaChalkboardTeacher />,
-    links: [
-      { name: "Completed Courses", path: "/classroom/completed" },
-      { name: "Running Courses", path: "/classroom/running" },
-    ],
-  },
-  {
-    name: "Coupons Available",
-    icon: <FaGift />,
-    links: [
-      {
-        name: "Recent Placement Companies",
-        path: "/coupons/recent-placement",
-      },
-      { name: "Job Portal", path: "/coupons/job-portal" },
-    ],
-  },
-  { name: "Resume Builder", icon: <FaUserEdit />, path: "/resume-builder" },
-  { name: "Internship", icon: <FaBriefcase />, path: "/internship" },
-  { name: "Certificate", icon: <FaCertificate />, path: "/certificate" },
-];
+const Sidebar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { setStudent } = useContext(StudentContext); // access context
 
-const Sidebar = ({ closeSidebar }) => {
+  const menuItems = [
+    { name: "Dashboard", icon: <FaTachometerAlt />, path: "/dashboard" },
+    { name: "Classroom", icon: <FaUniversity />, path: "/classroom" },
+    { name: "Placements", icon: <FaBullhorn />, path: "/Placements" },
+    { name: "Internship", icon: <FaLaptopCode />, path: "/internship" },
+    { name: "Resume Builder", icon: <FaFileAlt />, path: "/resume-builder" },
+    { name: "Certificate", icon: <FaCertificate />, path: "/certificate" },
+    { name: "Payments", icon: <FaCreditCard />, path: "/payments" },
+  ];
+
+ const handleLogout = () => {
+  setStudent(null); // clear context
+  toast.success("Logged out successfully!");
+  navigate("/logout"); // navigate to logout page
+};
+
+
   return (
-    <>
-      {/* Background overlay */}
-      <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
-        onClick={closeSidebar}
-      ></div>
+    <div className="w-64 min-h-screen flex flex-col bg-gradient-to-b from-blue-700 to-blue-500 text-white relative shadow-xl">
+      {/* White curved top with shadow */}
+      <div className="w-full h-28 bg-white rounded-b-[50%] shadow-md absolute top-0 left-0"></div>
 
-      {/* Sidebar */}
-      <div className="fixed top-0 left-0 h-full w-64 bg-purple-700 text-white shadow-lg z-50 pt-16 flex flex-col">
-        {/* Header */}
-        <div className="flex justify-between items-center px-4 py-3 border-b border-purple-500">
-          <h2 className="text-lg font-bold">Student Panel</h2>
-          <button
-            onClick={closeSidebar}
-            className="text-white hover:text-gray-300 text-xl"
-          >
-            ✕
-          </button>
+      {/* Logo */}
+      <div className="flex justify-center mt-8 relative z-10">
+        <div className="w-28 h-28 rounded-full border-4 border-blue-900 bg-white flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300">
+          <img src={MyLogo} alt="Logo" className="w-20 h-20 object-contain" />
         </div>
+      </div>
 
-        {/* Menu */}
-        <ul className="px-4 py-4 space-y-2 flex-1 overflow-y-auto">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              {item.links ? (
-                <details className="group">
-                  <summary className="cursor-pointer flex items-center gap-3 px-2 py-2 hover:bg-purple-600 rounded transition">
-                    {item.icon} <span>{item.name}</span>
-                  </summary>
-                  <ul className="ml-8 mt-2 space-y-1">
-                    {item.links.map((subItem, subIndex) => (
-                      <li key={subIndex}>
-                        <Link
-                          to={subItem.path}
-                          className="block px-2 py-1 rounded hover:bg-purple-600 transition"
-                          onClick={closeSidebar}
-                        >
-                          {subItem.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
+      {/* Menu */}
+      <nav className="flex-1 px-6 mt-12">
+        <ul className="space-y-4">
+          {menuItems.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <li key={item.name}>
                 <Link
                   to={item.path}
-                  className="flex items-center gap-3 px-2 py-2 rounded hover:bg-purple-600 transition"
-                  onClick={closeSidebar}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 
+                    ${
+                      isActive
+                        ? "bg-white text-blue-700 shadow-md"
+                        : "hover:bg-white/20 hover:translate-x-1"
+                    }`}
                 >
                   {item.icon} <span>{item.name}</span>
                 </Link>
-              )}
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
+      </nav>
 
-        {/* Logout at bottom */}
-        <div className="p-4 border-t border-purple-500">
-          <Link
-            to="/logout"
-            className="flex items-center gap-3 px-2 py-2 rounded hover:bg-purple-600 transition"
-            onClick={closeSidebar}
-          >
-            <FaSignOutAlt /> <span>Logout</span>
-          </Link>
-        </div>
+      {/* Logout */}
+      <div className="p-6">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center justify-center gap-3 py-3 bg-red-500 rounded-lg hover:bg-red-600 transition-all duration-300 font-semibold shadow-md hover:scale-105"
+        >
+          <FaSignOutAlt /> Logout
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

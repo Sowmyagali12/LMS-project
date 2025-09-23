@@ -1,34 +1,34 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaBook, FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaBriefcase, FaBuilding } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const Classroom = () => {
+const Placements = () => {
   const navigate = useNavigate();
 
-  const classroomCards = [
+  const placementCards = [
     {
-      title: "Completed Courses",
-      description: "View all the courses you have successfully completed.",
-      icon: <FaBook size={22} className="text-green-600" />,
-      link: "/classroom/completed",
-      bg: "from-green-100 to-white",
-      hover: "hover:shadow-green-300",
+      title: "Job Portal",
+      description: "Explore job opportunities and apply directly.",
+      icon: <FaBriefcase size={22} className="text-indigo-600" />,
+      link: "/placements/job-portal",
+      bg: "from-indigo-100 to-blue-50",
+      hover: "hover:shadow-indigo-300",
     },
     {
-      title: "Running Courses",
-      description: "Check your ongoing courses and continue learning.",
-      icon: <FaBook size={22} className="text-blue-600" />,
-      link: "/classroom/running",
-      bg: "from-blue-100 to-white",
-      hover: "hover:shadow-blue-300",
+      title: "Recent Placement Companies",
+      description: "Check out companies where students were placed recently.",
+      icon: <FaBuilding size={22} className="text-teal-600" />,
+      link: "/placements/recent-placement-companies",
+      bg: "from-teal-100 to-green-50",
+      hover: "hover:shadow-teal-300",
     },
   ];
 
   return (
     <div
-      className="p-8 min-h-screen font-sans
-      bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 relative"
+      className="p-8 min-h-screen font-sans relative
+      bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300"
     >
       {/* Back Arrow */}
       <button
@@ -45,21 +45,21 @@ const Classroom = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h1 className="text-4xl font-extrabold text-blue-900 drop-shadow-sm mb-2">
-          Classroom
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-900 drop-shadow-sm mb-2">
+        Placements
         </h1>
         <p className="text-blue-700 text-sm md:text-base">
-          Manage and track your courses here.
+          Explore placement opportunities and job portals.
         </p>
       </motion.div>
 
-      {/* Classroom Cards */}
+      {/* Placement Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
-        {classroomCards.map((card, idx) => (
+        {placementCards.map((card, idx) => (
           <Link to={card.link} key={idx}>
             <motion.div
               className={`
-                p-6 border border-gray-200 rounded-2xl shadow-md
+                rounded-2xl p-6 border border-gray-200 shadow-md
                 bg-gradient-to-br ${card.bg}
                 transform transition-all duration-300
                 hover:-translate-y-2 hover:scale-105 ${card.hover}
@@ -97,4 +97,4 @@ const Classroom = () => {
   );
 };
 
-export default Classroom;
+export default Placements;

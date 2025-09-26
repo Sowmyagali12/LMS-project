@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { StudentProvider } from "./context/StudentContext";
-import { ProgressProvider } from "./context/ProgressContext"; // ✅ Import ProgressProvider
+import { ProgressProvider } from "./context/ProgressContext"; 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // Components
 import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 import ChatBox from "./components/ChatBox";
 import CourseSyllabus from "./pages/dashboard/CourseSyllabus";
 
@@ -24,6 +24,7 @@ import Internship from "./pages/Internship";
 import Certificate from "./pages/Certificate";
 import Payments from "./pages/Payments";
 import Courses from "./pages/dashboard/Courses";
+import Mentor from "./mentor"; // ✅ Correctly imported
 
 // Dashboard subpages
 import WeeklyProgress from "./pages/dashboard/WeeklyProgress";
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <StudentProvider>
-      <ProgressProvider> {/* ✅ Wrap with ProgressProvider */}
+      <ProgressProvider>
         <Router>
           <div className="flex min-h-screen overflow-x-hidden bg-gray-50 pt-0">
             {/* Sidebar */}
@@ -69,8 +70,8 @@ function App() {
                   <Route path="/dashboard/placement" element={<Placement />} />
                   <Route path="/dashboard/updates" element={<Updates />} />
 
-                  {/* Live Classes / Syllabus */}
-                  <Route path="/course/:id" element={<CourseSyllabus />} />
+                  {/* ✅ Mentor Dashboard */}
+                  <Route path="/mentor" element={<Mentor />} />
 
                   {/* Classroom */}
                   <Route path="/classroom" element={<Classroom />} />

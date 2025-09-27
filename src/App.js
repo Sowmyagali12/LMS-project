@@ -1,58 +1,53 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import AdminNavbar from "./components/Navbar";  // ensure default export
+import AdminSidebar from "./components/Sidebar"; // ensure default export
 
-// ✅ Components (match file names exactly)
-import Footer from "./components/Foot.jsx";
-import Navbar from "./components/Navbar.jsx";
 
-// ✅ Pages (based on your `ls src/pages` output)
-import AboutUs from './pages/AboutUs.jsx';
-import HomePage from './pages/HomePage.js';
-import Login from './pages/Login.jsx';
-import Signup from './pages/Signup.js';
-import ForgotPassword from './pages/ForgotPassword.jsx';
-import ChangePassword from './pages/ChangePassword.jsx';
-import ContactUs from './pages/ContactUs.js';
-import Courses from './pages/Courses.jsx';
-import PaymentPage from './pages/PaymentPage.jsx';
-import CourseLanding from './pages/CourseLanding.jsx';
-import EnrolledCourses from './pages/EnrolledCourses.jsx';
-import CourseContent from './pages/CourseContent.jsx';
-
-// ✅ Newly added file (you need to create this if not exists)
-import AdminDashboard from './pages/AdminDashboard.jsx';
+// Pages (ensure all are default exported)
+import Dashboard from "./pages/Dashboard";
+import Batches from "./pages/Batchescompleted";
+import Courses from "./pages/Courses";
+import Internships from "./pages/Internships";
+import Employers from "./pages/Employersupdate";
+import StudentsHired from "./pages/Studentshired";
+import Payments from "./pages/Payments";
+import Coupons from "./pages/Couponsgenerated";
 
 function App() {
+  const notifications = [
+    { message: "New student registered" },
+    { message: "Payment received" },
+  ];
+
   return (
     <Router>
-      <Navbar />
+      <div className="flex h-screen">
+        {/* Sidebar */}
+        <AdminSidebar />
 
-      <main>
-        <Routes>
-          {/* 🌟 Public Routes */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/aboutus" element={<AboutUs />} />
+        {/* Main content */}
+        <div className="flex-1 flex flex-col">
+          {/* Navbar */}
+          <AdminNavbar notifications={notifications} />
 
-          {/* 🎓 Course Routes */}
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:courseId" element={<CourseLanding />} />
-
-          {/* 💳 Payment Route */}
-          <Route path="/payment/:courseId" element={<PaymentPage />} />
-          <Route path="/dashboard" element={<EnrolledCourses />} />
-          <Route path="/course-content/:courseId" element={<CourseContent />} />
-
-          {/* 👨‍💼 Admin Route */}
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        </Routes>
-      </main>
-
-      <Footer />
+          {/* Page Content */}
+          <div className="flex-1 p-6 overflow-auto bg-gray-100">
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/batches" element={<Batches />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/internships" element={<Internships />} />
+              <Route path="/employers" element={<Employers />} />
+              <Route path="/students-hired" element={<StudentsHired />} />
+              <Route path="/payments" element={<Payments />} />
+              <Route path="/coupons" element={<Coupons />} />
+              
+            </Routes>
+          </div>
+        </div>
+      </div>
     </Router>
   );
 }

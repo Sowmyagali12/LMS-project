@@ -1,83 +1,210 @@
-import React, { useEffect, useState } from 'react';
-import CourseCard from './CourseCard';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 
 const Courses = () => {
-  const [courses, setCourses] = useState([]);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [courses, setCourses] = useState([
+    { id: 1, name: "Web Development", duration: "3 Months", description: "Learn full-stack basics" },
+  ]);
+  const [newCourse, setNewCourse] = useState("");
+  const [newDuration, setNewDuration] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [search, setSearch] = useState("");
+  const [sortOption, setSortOption] = useState("");
+  const [editId, setEditId] = useState(null);
+  const [editName, setEditName] = useState("");
+  const [editDuration, setEditDuration] = useState("");
+  const [editDescription, setEditDescription] = useState("");
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const token = localStorage.getItem('token');
+  // Add Course
+  const addCourse = () => {
+    if (!newCourse.trim()) return;
+    setCourses([
+      ...courses,
+      {
+        id: courses.length + 1,
+        name: newCourse,
+        duration: newDuration || "N/A",
+        description: newDescription || "No description",
+      },
+    ]);
+    setNewCourse("");
+    setNewDuration("");
+    setNewDescription("");
+  };
 
-      if (!token) {
-        navigate('/login');
-        return;
-      }
+  // Delete Course
+  const deleteCourse = (id) => {
+    setCourses(courses.filter((course) => course.id !== id));
+  };
 
-      try {
-        const response = await fetch('http://localhost:8080/course/get', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
+  // Clear All Courses
+  const clearCourses = () => {
+    if (window.confirm("Are you sure you want to remove all courses?")) {
+      setCourses([]);
+    }
+  };
 
-        if (!response.ok) {
-          if (response.status === 401 || response.status === 403) {
-            throw new Error('Unauthorized or token expired. Please login again.');
-          }
-          throw new Error('Failed to fetch courses');
-        }
+  // Start Editing
+  const startEditing = (course) => {
+    setEditId(course.id);
+    setEditName(course.name);
+    setEditDuration(course.duration);
+    setEditDescription(course.description);
+  };
 
-        const data = await response.json();
-        console.log('Fetched courses:', data);
-        setCourses(data);
-      } catch (err) {
-        setError(err.message || 'Something went wrong');
-      }
-    };
+  // Save Edited Course
+  const saveEdit = () => {
+    setCourses(
+      courses.map((c) =>
+        c.id === editId
+          ? { ...c, name: editName, duration: editDuration, description: editDescription }
+          : c
+      )
+    );
+    setEditId(null);
+    setEditName("");
+    setEditDuration("");
+    setEditDescription("");
+  };
 
-    fetchCourses();
-  }, [navigate]);
+  // Filter + Sort Courses
+  let filteredCourses = courses.filter((course) =>
+    course.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  if (sortOption === "name") {
+    filteredCourses = [...filteredCourses].sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortOption === "duration") {
+    filteredCourses = [...filteredCourses].sort((a, b) =>
+      a.duration.localeCompare(b.duration)
+    );
+  }
 
   return (
-    <div className="bg-white text-gray-800">
-      {/* 🔷 Banner Section */}
-      <section>
-        <div
-          className="w-full h-64 flex flex-col items-center justify-center text-white text-center bg-cover bg-center mb-8 rounded-xl"
-          style={{
-            backgroundImage: 'url("https://www.ashokitech.in/assets/images/career-banner01.png")',
-          }}
+    <div className="w-full min-h-screen p-4 space-y-8">
+      {/* Header */}
+      <h1 className="text-3xl font-bold mb-4 text-gray-800">Courses</h1>
+
+      {/* Search + Sort */}
+      <div className="flex gap-4 flex-wrap mb-6">
+        <input
+          type="text"
+          placeholder="Search courses..."
+          className="px-4 py-2 border rounded-lg flex-1"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="px-4 py-2 border rounded-lg"
         >
-          <h1 className="text-3xl font-bold mb-2 drop-shadow-lg">Software Courses</h1>
-          <p className="text-lg drop-shadow-sm">Explore new and trending courses.</p>
+          <option value="">Sort By</option>
+          <option value="name">Name</option>
+          <option value="duration">Duration</option>
+        </select>
+      </div>
+
+      {/* Add Course Form */}
+      <div className="flex flex-col gap-3 mb-6 bg-gray-50 p-4 rounded-lg shadow">
+        <input
+          type="text"
+          placeholder="Course name"
+          className="px-4 py-2 border rounded-lg"
+          value={newCourse}
+          onChange={(e) => setNewCourse(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Duration (e.g. 10 weeks, 1 year)"
+          className="px-4 py-2 border rounded-lg"
+          value={newDuration}
+          onChange={(e) => setNewDuration(e.target.value)}
+        />
+        <textarea
+          placeholder="Short description (optional)"
+          className="px-4 py-2 border rounded-lg"
+          value={newDescription}
+          onChange={(e) => setNewDescription(e.target.value)}
+        />
+        <div className="flex gap-3">
+          <button
+            onClick={addCourse}
+            className="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition"
+          >
+            Add Course
+          </button>
+          <button
+            onClick={clearCourses}
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+          >
+            Clear All
+          </button>
         </div>
-      </section>
+      </div>
 
-      {/* 📚 Courses Grid Section */}
-      <section className="px-10 py-10">
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <CourseCard
-              key={course.courseId}
-              courseId={course.courseId}
-              courseName={course.courseName}
-              courseFee={course.courseFee}
-              courseDuration={course.courseDuration}
-              courseSilybus={course.courseSilybus}
-              description={course.description}
-              pdfContentUrl={course.pdfContentUrl}
-              imageurl={course.imageUrl} 
-            />
+      {/* Courses List */}
+      {filteredCourses.length === 0 ? (
+        <p className="text-gray-500 italic">No courses available.</p>
+      ) : (
+        <ul className="space-y-4">
+          {filteredCourses.map((course) => (
+            <li
+              key={course.id}
+              className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center"
+            >
+              {editId === course.id ? (
+                <div className="flex flex-col gap-3 w-full">
+                  <input
+                    type="text"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    className="px-3 py-2 border rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    value={editDuration}
+                    onChange={(e) => setEditDuration(e.target.value)}
+                    className="px-3 py-2 border rounded-lg"
+                  />
+                  <textarea
+                    value={editDescription}
+                    onChange={(e) => setEditDescription(e.target.value)}
+                    className="px-3 py-2 border rounded-lg"
+                  />
+                  <button
+                    onClick={saveEdit}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                  >
+                    Save
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <h3 className="font-semibold text-gray-800">{course.name}</h3>
+                    <p className="text-gray-500">Duration: {course.duration}</p>
+                    <p className="text-gray-400 italic">{course.description}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => startEditing(course)}
+                      className="px-3 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteCourse(course.id)}
+                      className="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
+      )}
     </div>
   );
 };

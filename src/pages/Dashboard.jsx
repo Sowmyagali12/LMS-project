@@ -6,56 +6,18 @@ import {
   FaLaptopCode,
   FaBullhorn,
   FaChartLine,
-  FaPlus,
-  FaUpload,
-  FaUsers,
   FaClock,
 } from "react-icons/fa";
 
 const Dashboard = () => {
-  const student = { name: "John Doe", course: "Computer Science", avatar: "" };
+  const student = { name: "John Doe", course: "Computer Science" };
 
   const dashboardCards = [
-    {
-      title: "Courses",
-      value: 5,
-      trend: "+2 this month",
-      icon: <FaBook size={22} className="text-indigo-600" />,
-      link: "/dashboard/courses",
-      color: "bg-indigo-50 border-indigo-200",
-    },
-    {
-      title: "Assignments",
-      value: 12,
-      trend: "3 pending",
-      icon: <FaFileAlt size={22} className="text-blue-600" />,
-      link: "/dashboard/assignments",
-      color: "bg-blue-50 border-blue-200",
-    },
-    {
-      title: "Placement",
-      value: 1,
-      trend: "Ongoing",
-      icon: <FaLaptopCode size={22} className="text-green-600" />,
-      link: "/dashboard/placement",
-      color: "bg-green-50 border-green-200",
-    },
-    {
-      title: "Updates",
-      value: "5 New",
-      trend: "Latest News",
-      icon: <FaBullhorn size={22} className="text-yellow-600" />,
-      link: "/dashboard/updates",
-      color: "bg-yellow-50 border-yellow-200",
-    },
-    {
-      title: "Weekly Progress",
-      value: "On Track",
-      trend: "",
-      icon: <FaChartLine size={22} className="text-red-600" />,
-      link: "/dashboard/weekly-progress",
-      color: "bg-red-50 border-red-200",
-    },
+    { title: "Courses", value: 5, trend: "+2 this month", icon: <FaBook />, link: "/dashboard/courses" },
+    { title: "Assignments", value: 12, trend: "3 pending", icon: <FaFileAlt />, link: "/dashboard/assignments" },
+    { title: "Placement", value: 1, trend: "Ongoing", icon: <FaLaptopCode />, link: "/dashboard/placement" },
+    { title: "Updates", value: "5 New", trend: "Latest News", icon: <FaBullhorn />, link: "/dashboard/updates" },
+    { title: "Weekly Progress", value: "On Track", trend: "", icon: <FaChartLine />, link: "/dashboard/weekly-progress" },
   ];
 
   const notices = [
@@ -70,27 +32,6 @@ const Dashboard = () => {
     { task: "Design UI Exercise", deadline: "25 Sep 2025" },
   ];
 
-  const quickActions = [
-    {
-      title: "Join Class",
-      icon: <FaUsers className="text-white" />,
-      link: "/join-class",
-      color: "bg-indigo-600",
-    },
-    {
-      title: "Upload Assignment",
-      icon: <FaUpload className="text-white" />,
-      link: "/upload-assignment",
-      color: "bg-green-600",
-    },
-    {
-      title: "Add Note",
-      icon: <FaPlus className="text-white" />,
-      link: "/notes",
-      color: "bg-yellow-500",
-    },
-  ];
-
   const recentActivity = [
     { action: "Uploaded Database Assignment", time: "2 hours ago" },
     { action: "Joined AI Class", time: "Yesterday" },
@@ -98,175 +39,119 @@ const Dashboard = () => {
     { action: "Checked Weekly Progress", time: "3 days ago" },
   ];
 
-  const topCourses = [
-    { name: "React Basics", progress: "Completed" },
-    { name: "Database Management", progress: "In Progress" },
-    { name: "UI/UX Design", progress: "Not Started" },
-  ];
-
-  const quickStats = [
-    { label: "Total Courses", value: 8, color: "bg-indigo-500", icon: <FaBook /> },
-    { label: "Pending Assignments", value: 3, color: "bg-red-500", icon: <FaFileAlt /> },
-    { label: "Internships", value: 1, color: "bg-green-500", icon: <FaLaptopCode /> },
-  ];
-
   return (
-    <div className="p-8 min-h-screen font-sans bg-gradient-to-br from-blue-50 via-blue-100 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 text-gray-800">
+      <style>
+        {`
+          @keyframes blueGradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}
+      </style>
+
       {/* Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 animate-fadeInUp">
+      <div
+        className="relative overflow-hidden rounded-3xl mx-auto mt-8 mb-12 p-10 text-white shadow-lg w-[95%] max-w-7xl flex flex-col md:flex-row justify-between items-center"
+        style={{
+          background: "linear-gradient(270deg, #3b82f6, #2563eb, #1e40af, #3b82f6)",
+          backgroundSize: "600% 600%",
+          animation: "blueGradientMove 10s ease infinite",
+        }}
+      >
         <div>
-          <h1 className="text-4xl font-bold text-blue-900 mb-2">
-            Hello, {student.name}
+          <h1 className="text-4xl font-bold mb-2 tracking-tight">
+            Dashboard Overview
           </h1>
-          <p className="text-gray-600">
-            Welcome back! Here's what's happening with your {student.course}.
+          <p className="text-blue-100 text-lg">
+            Welcome, {student.name}. This summary provides an overview of your current academic progress and activities in the {student.course} program.
           </p>
         </div>
-        <div className="mt-6 md:mt-0">
-          <div className="w-20 h-20 rounded-full bg-indigo-600 flex items-center justify-center shadow-md">
-            {student.avatar ? (
-              <img
-                src={student.avatar}
-                alt="avatar"
-                className="w-20 h-20 rounded-full"
-              />
-            ) : (
-              <span className="text-3xl text-white">👤</span>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="flex flex-wrap gap-4 mb-10">
-        {quickActions.map((action, i) => (
-          <Link
-            key={i}
-            to={action.link}
-            className={`flex items-center gap-3 px-5 py-3 rounded-xl shadow-md text-white font-medium transition transform hover:scale-110 hover:shadow-xl active:scale-95 duration-300 ${action.color} animate-fadeIn`}
-            style={{ animationDelay: `${i * 0.1}s` }}
-          >
-            {action.icon}
-            {action.title}
-          </Link>
-        ))}
       </div>
 
       {/* Dashboard Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-[95%] max-w-7xl mx-auto mb-12">
         {dashboardCards.map((card, idx) => (
-          <Link to={card.link} key={idx}>
-            <div
-              className={`rounded-xl shadow-md p-5 border transition transform hover:shadow-lg hover:-translate-y-2 duration-300 cursor-pointer ${card.color} animate-fadeIn`}
-              style={{ animationDelay: `${idx * 0.15}s` }}
-            >
-              <div className="flex items-center justify-between">
-                <div className="p-2 bg-white rounded-md shadow-sm">{card.icon}</div>
+          <Link key={idx} to={card.link}>
+            <div className="group relative bg-white/90 backdrop-blur-md border border-blue-100 p-5 rounded-2xl shadow-[0_4px_6px_rgba(135,206,250,0.4)] hover:shadow-[0_8px_12px_rgba(135,206,250,0.6)] transition-all duration-300 hover:-translate-y-2">
+              <div className="flex justify-between items-center mb-3">
+                <div className="text-lg text-black transition-transform duration-300 group-hover:scale-110">
+                  {card.icon}
+                </div>
                 {card.trend && (
-                  <span className="text-xs font-medium text-gray-500">{card.trend}</span>
+                  <span className="text-sm text-gray-500">{card.trend}</span>
                 )}
               </div>
-              <div className="mt-4">
-                <h3 className="text-lg font-semibold text-gray-800">{card.title}</h3>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{card.value}</p>
-              </div>
+              <h3 className="text-lg font-semibold text-gray-700">{card.title}</h3>
+              <p className="text-2xl font-bold mt-1 text-blue-700">{card.value}</p>
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-100/40 to-indigo-100/40 blur-sm"></div>
             </div>
           </Link>
         ))}
       </div>
 
-      {/* Notices & Deadlines */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        {/* Notices */}
-        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition animate-slideIn">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">📢 Latest Notices</h2>
-          <ul className="space-y-3">
-            {notices.map((notice, i) => (
-              <li
-                key={i}
-                className="flex justify-between items-center border-b border-gray-200 pb-3 last:border-none"
-              >
-                <div className="text-gray-700">{notice.title}</div>
-                <div className="text-sm text-gray-500">{notice.date}</div>
-              </li>
-            ))}
-          </ul>
+{/* Notices + Deadlines */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-[95%] max-w-7xl mx-auto mb-12">
+  {/* Notices */}
+  <div className="bg-white rounded-2xl shadow-lg p-6 border border-blue-100">
+    <h2 className="text-xl font-bold mb-4 text-black flex items-center gap-2">
+      <FaBullhorn className="text-black text-lg" /> Latest Notices
+    </h2>
+    <ul className="divide-y divide-gray-100">
+      {notices.map((notice, i) => (
+        <li key={i} className="flex justify-between items-center py-3 rounded-lg px-2">
+          <span className="font-medium text-gray-700">{notice.title}</span>
+          <span className="text-sm text-blue-700">{notice.date}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  {/* Deadlines */}
+  <div className="bg-white rounded-2xl shadow-lg p-6 border border-blue-100">
+    <h2 className="text-xl font-bold mb-4 text-black flex items-center gap-2">
+      <FaClock className="text-black text-lg" /> Upcoming Deadlines
+    </h2>
+    <ul className="space-y-3">
+      {upcomingTasks.map((task, i) => (
+        <li key={i} className="bg-blue-50 p-3 rounded-lg flex justify-between items-center">
+          <span className="font-medium text-gray-700">{task.task}</span>
+          <span className="text-sm text-blue-700 font-semibold">{task.deadline}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+{/* Activity Timeline */}
+<div className="bg-white rounded-3xl shadow-xl border border-blue-100 p-8 w-[95%] max-w-7xl mx-auto mb-12">
+  <h2 className="text-xl font-bold mb-6 text-black flex items-center gap-2">
+    <FaClock className="text-black text-lg" /> Recent Activity
+  </h2>
+  <div className="space-y-4">
+    {recentActivity.map((activity, i) => (
+      <div
+        key={i}
+        className="flex items-start gap-4 bg-blue-50/50 p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+      >
+        <div className="flex-shrink-0 text-blue-600 text-lg mt-1">
+          <FaBullhorn />
         </div>
-
-        {/* Deadlines */}
-        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition animate-slideIn">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">📌 Upcoming Deadlines</h2>
-          <ul className="space-y-3">
-            {upcomingTasks.map((task, i) => (
-              <li
-                key={i}
-                className="flex justify-between items-center border-b border-gray-200 pb-3 last:border-none"
-              >
-                <div className="text-gray-700">{task.task}</div>
-                <div className="text-sm text-red-500 font-medium">{task.deadline}</div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 mb-10 hover:shadow-lg transition animate-fadeIn">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">⏱️ Recent Activity</h2>
-        <ul className="space-y-4">
-          {recentActivity.map((activity, i) => (
-            <li key={i} className="flex items-start gap-3">
-              <div className="mt-1 text-indigo-600 animate-pulse">
-                <FaClock />
-              </div>
-              <div>
-                <p className="text-gray-700 font-medium">{activity.action}</p>
-                <p className="text-sm text-gray-500">{activity.time}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Top Courses & Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        {/* Top Courses */}
-        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition animate-slideIn">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">🌟 Top Courses</h2>
-          <ul className="space-y-3">
-            {topCourses.map((course, i) => (
-              <li
-                key={i}
-                className="flex justify-between items-center border-b border-gray-200 pb-3 last:border-none"
-              >
-                <div className="text-gray-700">{course.name}</div>
-                <div className="text-sm text-indigo-600 font-medium">{course.progress}</div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition animate-slideIn">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">📊 Quick Stats</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {quickStats.map((stat, i) => (
-              <div
-                key={i}
-                className={`flex items-center justify-between p-4 rounded-xl text-white shadow-md transition transform hover:scale-105 hover:shadow-lg ${stat.color} animate-fadeIn`}
-                style={{ animationDelay: `${i * 0.2}s` }}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-lg opacity-90">{stat.icon}</span>
-                  <span className="font-medium">{stat.label}</span>
-                </div>
-                <span className="font-bold text-lg">{stat.value}</span>
-              </div>
-            ))}
-          </div>
+        <div>
+          <p className="font-semibold text-gray-700">{activity.action}</p>
+          <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+            <FaClock className="text-black text-sm" /> {activity.time}
+          </p>
         </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
+
+      </div>
+    
   );
 };
 

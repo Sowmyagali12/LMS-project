@@ -103,28 +103,39 @@ const ResumeBuilder = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 p-10 relative">
+    <div className="min-h-screen p-10 relative bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 text-gray-900 font-sans">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 p-2 rounded-full hover:bg-blue-200 transition z-50"
+        className="absolute top-6 left-6 p-2 rounded-full hover:bg-blue-100 transition z-50"
       >
         <FaArrowLeft className="text-blue-600 w-6 h-6" />
       </button>
 
-      <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-12">
-        AI Resume Builder
-      </h1>
+      {/* Header */}
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <h1 className="text-5xl font-extrabold mb-3 text-blue-900 drop-shadow-sm">
+          AI Resume Builder
+        </h1>
+        <p className="text-blue-700 text-lg max-w-2xl mx-auto">
+          Generate a professional resume with AI assistance.
+        </p>
+      </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
         {/* Left - Form */}
         <motion.div
-          className="bg-white rounded-2xl shadow-lg p-8 border border-blue-200"
+          className="rounded-2xl p-8 bg-white border border-gray-200 shadow-md transform transition-all hover:-translate-y-1 hover:shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold text-blue-700 mb-6 border-b border-blue-200 pb-3">
+          <h2 className="text-2xl font-bold text-blue-800 mb-6 border-b border-gray-200 pb-3">
             ✍️ Enter Your Details
           </h2>
           <form className="space-y-5">
@@ -175,14 +186,14 @@ const ResumeBuilder = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={aiResume ? "preview" : "placeholder"}
-            className="bg-white rounded-2xl shadow-lg p-8 border border-blue-200 overflow-y-auto max-h-[75vh] scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100"
+            className="rounded-2xl p-8 bg-white border border-gray-200 shadow-md overflow-y-auto max-h-[75vh] scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 transform transition-all hover:-translate-y-1 hover:shadow-lg"
             ref={previewRef}
             initial="hidden"
             animate="visible"
             exit="exit"
             variants={previewVariants}
           >
-            <h2 className="text-2xl font-bold text-blue-700 mb-6 border-b border-blue-200 pb-3">
+            <h2 className="text-2xl font-bold text-blue-800 mb-6 border-b border-gray-200 pb-3">
               AI-Generated Resume
             </h2>
             <div className="prose max-w-none text-gray-800 whitespace-pre-wrap leading-relaxed">
@@ -192,11 +203,7 @@ const ResumeBuilder = () => {
             </div>
 
             {aiResume && (
-              <motion.div
-                className="mt-6 flex flex-col gap-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
+              <motion.div className="mt-6 flex flex-col gap-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <motion.button
                   onClick={handleDownloadPDF}
                   whileHover={{ scale: 1.03 }}

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { StudentProvider } from "./context/StudentContext";
-import { ProgressProvider } from "./context/ProgressContext"; // ✅ Import ProgressProvider
+import { ProgressProvider } from "./context/ProgressContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,27 +9,26 @@ import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import ChatBox from "./components/ChatBox";
-import CourseSyllabus from "./pages/dashboard/CourseSyllabus";
 
-// Pages
+// Dashboard pages
 import Dashboard from "./pages/Dashboard";
-import Classroom from "./pages/Classroom";
-import CompletedCourses from "./pages/Classroom/CompletedCourses";
-import RunningCourses from "./pages/Classroom/RunningCourses";
-import Placements from "./pages/Placements";
-import JobPortal from "./pages/Placements/JobPortal";
-import RecentPlacementCompanies from "./pages/Placements/RecentPlacementCompanies";
-import ResumeBuilder from "./pages/ResumeBuilder";
-import Internship from "./pages/Internship";
-import Certificate from "./pages/Certificate";
-import Payments from "./pages/Payments";
 import Courses from "./pages/dashboard/Courses";
-
-// Dashboard subpages
+import CourseSyllabus from "./pages/dashboard/CourseSyllabus";
 import WeeklyProgress from "./pages/dashboard/WeeklyProgress";
 import Assignments from "./pages/dashboard/Assignments";
 import Placement from "./pages/dashboard/Placement";
 import Updates from "./pages/dashboard/Updates";
+
+// Placements pages
+import Placements from "./pages/Placements";
+import JobPortal from "./pages/Placements/JobPortal";
+import RecentPlacementCompanies from "./pages/Placements/RecentPlacementCompanies";
+
+// Other pages
+import ResumeBuilder from "./pages/ResumeBuilder";
+import Internship from "./pages/Internship";
+import Certificate from "./pages/Certificate";
+import Payments from "./pages/Payments";
 
 // Profile & Settings
 import Profile from "./pages/Profile";
@@ -44,7 +43,7 @@ function App() {
 
   return (
     <StudentProvider>
-      <ProgressProvider> {/* ✅ Wrap with ProgressProvider */}
+      <ProgressProvider>
         <Router>
           <div className="flex min-h-screen overflow-x-hidden bg-gray-50 pt-0">
             {/* Sidebar */}
@@ -69,13 +68,8 @@ function App() {
                   <Route path="/dashboard/placement" element={<Placement />} />
                   <Route path="/dashboard/updates" element={<Updates />} />
 
-                  {/* Live Classes / Syllabus */}
+                  {/* Live course */}
                   <Route path="/course/:id" element={<CourseSyllabus />} />
-
-                  {/* Classroom */}
-                  <Route path="/classroom" element={<Classroom />} />
-                  <Route path="/classroom/completed" element={<CompletedCourses />} />
-                  <Route path="/classroom/running" element={<RunningCourses />} />
 
                   {/* Placements */}
                   <Route path="/placements" element={<Placements />} />

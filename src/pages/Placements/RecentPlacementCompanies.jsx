@@ -29,7 +29,7 @@ const RecentPlacementCompanies = () => {
       {/* Header */}
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          🏢 Recent Placement Companies
+          🏢 Recently Placed Companies
         </h1>
         <p className="text-gray-600">
           These are some of the companies where our students were recently placed.

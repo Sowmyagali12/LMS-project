@@ -10,7 +10,6 @@ import {
   FaLaptopCode,
   FaFileAlt,
   FaCertificate,
-  FaUniversity,
   FaCreditCard,
 } from "react-icons/fa";
 import { StudentContext } from "../context/StudentContext";
@@ -22,20 +21,18 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: "Dashboard", icon: <FaTachometerAlt />, path: "/dashboard" },
-    { name: "Classroom", icon: <FaUniversity />, path: "/classroom" },
-    { name: "Placements", icon: <FaBullhorn />, path: "/Placements" },
+    { name: "Placements", icon: <FaBullhorn />, path: "/placements" }, // fixed lowercase
     { name: "Internship", icon: <FaLaptopCode />, path: "/internship" },
     { name: "Resume Builder", icon: <FaFileAlt />, path: "/resume-builder" },
     { name: "Certificate", icon: <FaCertificate />, path: "/certificate" },
     { name: "Payments", icon: <FaCreditCard />, path: "/payments" },
   ];
 
- const handleLogout = () => {
-  setStudent(null); // clear context
-  toast.success("Logged out successfully!");
-  navigate("/logout"); // navigate to logout page
-};
-
+  const handleLogout = () => {
+    setStudent(null); // clear context
+    toast.success("Logged out successfully!");
+    navigate("/logout"); // navigate to logout page
+  };
 
   return (
     <div className="w-64 min-h-screen flex flex-col bg-gradient-to-b from-blue-700 to-blue-500 text-white relative shadow-xl">

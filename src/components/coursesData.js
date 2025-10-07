@@ -1,184 +1,104 @@
 // src/components/coursesData.js
-
 export const courses = [
-  // Frontend Courses
   {
-  id: 1,
-  title: "React JS",
-  description: "Learn React JS from scratch",
-  syllabus: [
-    "Introduction to React\n• History of React\n• Key Benefits of React\n• React development environment\n• Creating your first React Application",
-    "JSX\n• Introduction to JSX\n• Coding in JSX\n• Expressions in JSX\n• Working with XML\n• Conditional Constructs",
-    "Components\n• Introduction to components\n• Why Components?\n• Writing JSX code in components\n• Adding CSS\n• Populating Data Dynamically\n• Passing data through props\n• Multiple Components",
-    "Rendering Lists and Conditional Contents\n• Rendering lists of data\n• Using stateful list\n• Keys in data\n• Conditional Contents\n• Adding dynamic styles",
-    "HTTP\n• Introduction to HTTP\n• Methods in HTTP\n• Introduction to REST interfaces\n• Characteristics of REST\n• Introduction to JSON\n• JSON data representation\n• GET request\n• Using async and await\n• Handling HTTP errors\n• POST request",
-    "Custom React Hooks\n• What are custom hooks?\n• Creating and using custom hooks\n• Custom HTTP hooks",
-    "Forms\n• Introduction to Forms\n• Working with user input and submission\n• Adding validation\n• Working with custom hooks",
-    "Routing and Navigation\n• Introduction to Single Page Applications\n• What is Routing?\n• Why Routing?\n• Installing React Router\n• Defining and using routes\n• Working with links\n• Dynamic routes with Params\n• Nested routes\n• Redirecting the user"
-  ],
-},
-
-
+    id: 1,
+    title: "Full Stack Python Developer",
+    description: "Learn Python programming along with Flask and React for full stack development (4.5 Months, 5 Days/Week).",
+    syllabus: [
+      "Week 1 - Python Basics\n• Day 1: Introduction to Python, Installation, IDE Setup, Python Syntax\n• Day 2: Data Types, Variables, Operators\n• Day 3: Conditional Statements (if, else, elif) and Loops (for, while)\n• Day 4: Functions, Recursion\n• Day 5: Modules, Packages, Exception Handling",
+      "Week 2 - Python OOP\n• Day 6: Classes, Objects, Constructors, self keyword\n• Day 7: Inheritance, super()\n• Day 8: Polymorphism (Overloading & Overriding)\n• Day 9: Encapsulation, Access Modifiers, Private/Public attributes\n• Day 10: Abstract Classes, Interfaces (ABC module)",
+      "Week 3 - Advanced Python\n• Day 11: File Handling (Read/Write files)\n• Day 12: Decorators, Generators\n• Day 13: Lambda Functions, Map, Filter, Reduce\n• Day 14: Regular Expressions, Error Handling\n• Day 15: Context Managers, Iterators",
+      "Week 4 - Python Libraries & Virtual Environments\n• Day 16: Introduction to pip, venv, package management\n• Day 17-20: Popular Libraries: NumPy, Pandas (Basics & Data Handling)",
+      "Weeks 5-6 - SQL & Databases\n• Day 21-30: SQL Basics, Joins, Subqueries, Functions, DML, DDL, Transactions, Python DB Connection (sqlite3, mysql-connector-python)",
+      "Weeks 7-8 - Web Development Basics (Flask)\n• Day 31-35: Introduction to Flask, Setting up a Web Server\n• Day 36-40: Routing, Templates (Jinja2), Static Files\n• Day 41-45: Forms Handling, CRUD Operations",
+      "Weeks 9-10 - Advanced Flask + REST APIs\n• Day 46-50: Blueprints, Session, Cookies, Authentication\n• Day 51-55: REST API Basics, GET/POST/PUT/DELETE\n• Day 56-60: REST API Integration with SQL Database",
+      "Weeks 11-12 - Frontend Basics (HTML, CSS, JavaScript)\n• Day 61-65: HTML Basics, Forms, Semantic Tags, Tables, Media Tags\n• Day 66-70: CSS Basics, Selectors, Flexbox, Grid, Animations, Media Queries\n• Day 71-75: JavaScript Basics, Variables, Functions, DOM Manipulation\n• Day 76-80: Events, Promises, ES6 Features, Fetch API",
+      "Weeks 13-15 - React.js (Frontend Integration)\n• Day 81: React Introduction, Components\n• Day 82: JSX, Props, State\n• Day 83: Events, Forms\n• Day 84: Hooks (useState, useEffect)\n• Day 85: React Router, API Integration\n• Day 86-90: React Project (Frontend)",
+      "Weeks 16-17 - Full Stack Integration\n• Day 91-95: Connect React Frontend with Flask Backend\n• Day 96-100: Full Stack Project (CRUD App with Python Backend + React Frontend)"
+    ]
+  },
   {
-  id: 2,
-  title: "Angular & TypeScript",
-  description: "Modern web apps with Angular & TypeScript",
-  syllabus: [
-    "Angular Fundamentals\n• Angular Fundamentals\n• Data Binding\n• Routing and Navigation\n• HTTP client\n• Component Interaction\n• Lifecycle Hooks\n• Angular Directives\n• Pipes\n• Services",
-    "TypeScript Basics\n• Type Annotations\n• Interfaces\n• Classes\n• Generics\n• Enums\n• Type Inference\n• Union and Intersection Types\n• Decorators\n• Modules"
-  ],
-},
-
+    id: 2,
+    title: "Full Stack C/C++ Developer",
+    description: "Learn C and C++ programming along with STL, Data Structures, Algorithms, and GUI development for full stack development (4.5 Months, 5 Days/Week).",
+    syllabus: [
+      "Week 1 - C Basics\n• Day 1: Introduction to C, Installation, IDE Setup, First Program, C Syntax\n• Day 2: Data Types, Variables, Constants, Operators\n• Day 3: Conditional Statements (if, else, switch) and Loops (for, while, do-while)\n• Day 4: Functions, Recursion, Call by Value & Reference\n• Day 5: Arrays, Strings, and Pointers Basics",
+      "Week 2 - Advanced C\n• Day 6: Pointers in Depth, Pointer Arithmetic\n• Day 7: Dynamic Memory Allocation (malloc, calloc, free)\n• Day 8: Structures and Unions\n• Day 9: File Handling (Read/Write files)\n• Day 10: Preprocessor Directives, Macros, Error Handling",
+      "Week 3 - C++ Basics\n• Day 11: Introduction to C++, OOP Concept, Setup\n• Day 12: Classes, Objects, Constructors, Destructors\n• Day 13: Access Specifiers, Encapsulation\n• Day 14: Inheritance, Types of Inheritance\n• Day 15: Polymorphism (Compile-time: Overloading, Runtime: Overriding)",
+      "Week 4 - Advanced C++\n• Day 16: Abstract Classes, Interfaces, Virtual Functions\n• Day 17: Operator Overloading\n• Day 18: Templates (Function & Class Templates)\n• Day 19: Exception Handling\n• Day 20: Standard Template Library (STL) – Introduction, Vectors, Iterators",
+      "Weeks 5-6 - STL & Data Structures\n• Day 21-25: STL – Lists, Sets, Maps, Queues, Stacks\n• Day 26-30: Data Structures – Linked List, Doubly Linked List, Circular Linked List",
+      "Weeks 7-8 - Advanced Data Structures & Algorithms\n• Day 31-35: Stack & Queue Implementation (Array & Linked List)\n• Day 36-40: Trees – Binary Tree, BST, Traversals\n• Day 41-45: Graphs Basics, BFS, DFS, Simple Graph Problems",
+      "Weeks 9-10 - File Handling & Advanced Concepts\n• Day 46-50: File I/O in C++ (fstream, ifstream, ofstream)\n• Day 51-55: Smart Pointers, Move Semantics, RAII\n• Day 56-60: Multithreading Basics, Concurrency, Mutex",
+      "Weeks 11-12 - GUI & Simple System Programming\n• Day 61-65: Introduction to GUI using Qt (Widgets, Signals & Slots)\n• Day 66-70: Socket Programming Basics (Client-Server Model)\n• Day 71-75: Networking with C++ (TCP/UDP)\n• Day 76-80: Process & Thread Management, File Permissions",
+      "Weeks 13-15 - Project Oriented (C++ Backend + CLI/GUI Frontend)\n• Day 81: Project Setup, Class Design\n• Day 82: File Handling Integration in Project\n• Day 83: STL & Data Structures Usage\n• Day 84: Implementing CLI or GUI (Qt Widgets)\n• Day 85: User Input Handling, Validation\n• Day 86-90: Project Work – Small System (Inventory, Student Database, Banking System)",
+      "Weeks 16-17 - Full Stack Integration / Advanced Features\n• Day 91-95: Integrating C++ Backend with GUI Frontend\n• Day 96-100: Full Project Completion, Optimization, Documentation, and Testing"
+    ]
+  },
   {
-  id: 3,
-  title: "React Native",
-  description: "Build mobile apps with React Native",
-  syllabus: [
-    "Introduction to React Native\n• What is React Native?\n• Differences between React Native and React.js\n• Advantages and limitations of React Native\n• Setting up the development environment",
-    "Core Components and APIs\n• Basic components: View, Text, Image, Button, ScrollView, FlatList, SectionList\n• Layout and styling: Flexbox, StyleSheet\n• Handling user input: TextInput, TouchableOpacity, TouchableHighlight, Pressable",
-    "State Management\n• useState and useReducer for local state\n• Context API for global state\n• Third-party libraries: Redux, Zustand, MobX, Recoil",
-    "Navigation\n• React Navigation: Stack, Tabs, Drawer navigators\n• Deep linking\n• Passing parameters between screens\n• Customizing navigation headers and transitions",
-    "Data Handling and Networking\n• Fetching data with fetch or Axios\n• REST API integration\n• Handling authentication tokens (e.g., Firebase, OAuth)\n• WebSocket for real-time updates",
-    "Styling\n• Inline styles vs. StyleSheet\n• Responsive design: Dimensions, PixelRatio",
-    "Forms and Validation\n• Handling forms with TextInput, Picker, Checkbox\n• Form libraries: Formik, React Hook Form\n• Validation libraries: Yup, Zod",
-    "Device Features and Native Modules\n• Camera and gallery access (react-native-image-picker, react-native-camera)\n• Location services (react-native-geolocation-service)\n• Sensors: Accelerometer, Gyroscope\n• Push notifications (react-native-push-notification, Firebase FCM)\n• Permissions (react-native-permissions)",
-    "Performance Optimization\n• Avoiding unnecessary renders with memo, useMemo, useCallback\n• Lazy loading components\n• Using FlatList effectively\n• Profiling and debugging performance bottlenecks",
-    "Third-Party Libraries\n• UI libraries: React Native Paper, NativeBase\n• Animation libraries: react-native-reanimated, react-native-gesture-handler\n• Navigation and routing: React Navigation, React Native Navigation\n• Image handling: FastImage",
-    "Integration with Backend\n• Authentication: Firebase, JWT\n• Real-time communication: WebSocket, SignalR\n• Backend as a Service (BaaS): Firebase, AWS Amplify"
-  ],
-},
-
-
-  // Backend Courses
- {
-  id: 4,
-  title: "DevOps",
-  description: "Learn DevOps tools, CI/CD, containers, cloud, and automation",
-  syllabus: [
-    "Week 1: Introduction & Linux Basics\n• Day 1: Introduction to DevOps, SDLC, and DevOps lifecycle\n• Day 2: Linux basics: file system, commands, users & permissions\n• Day 3: Shell scripting basics\n• Day 4: Linux networking & process management\n• Day 5: Package management (apt, yum)\n• Day 6: File handling & text processing (grep, awk, sed)\n• Day 7: Revision & mini project (Shell automation scripts)",
-
-    "Week 2: Version Control & Build Tools\n• Day 8: Introduction to Git & GitHub\n• Day 9: Git branching, merging, pull requests\n• Day 10: Git workflows (feature branch, GitFlow)\n• Day 11: Introduction to build tools: Maven & Gradle\n• Day 12: Build automation, dependencies, and plugins\n• Day 13: Introduction to Jenkins & CI concepts\n• Day 14: Mini project (Git + Jenkins pipeline for a simple app)",
-
-    "Week 3: Configuration Management & Containers\n• Day 15: Introduction to configuration management (Ansible basics)\n• Day 16: Playbooks, roles, and inventories in Ansible\n• Day 17: Introduction to Docker: images, containers, volumes\n• Day 18: Docker networking & Docker Compose\n• Day 19: Container best practices & Dockerfile optimization\n• Day 20: Hands-on Docker project\n• Day 21: Mini project (Containerize a simple web application)",
-
-    "Week 4: Continuous Integration & Deployment\n• Day 22: Advanced Jenkins pipelines (Declarative & Scripted)\n• Day 23: CI/CD concepts & pipeline design\n• Day 24: Integration with GitHub & automated testing\n• Day 25: Deployment automation with Ansible\n• Day 26: Introduction to Kubernetes (pods, deployments, services)\n• Day 27: Kubernetes hands-on: scaling & self-healing\n• Day 28: Mini project (CI/CD pipeline with automated deployment)",
-
-    "Week 5: Cloud & Monitoring\n• Day 29: Introduction to cloud computing (AWS/GCP basics)\n• Day 30: EC2, S3, RDS, IAM basics\n• Day 31: Infrastructure as Code (Terraform basics)\n• Day 32: Introduction to monitoring & logging (Prometheus, Grafana)\n• Day 33: Alerting & dashboards\n• Day 34: ELK Stack (Elasticsearch, Logstash, Kibana) basics\n• Day 35: Mini project (Deploy app to cloud + monitoring setup)",
-
-    "Week 6: Advanced DevOps & Projects\n• Day 36: Advanced Kubernetes concepts (Ingress, ConfigMaps, Secrets)\n• Day 37: Helm charts & package management for Kubernetes\n• Day 38: Security best practices in DevOps\n• Day 39: Scaling & high availability design\n• Day 40: DevOps pipelines for microservices\n• Day 41: Troubleshooting & debugging pipelines\n• Day 42: Final project presentation (Full CI/CD pipeline with monitoring and cloud deployment)"
-  ],
-},
-
-{
-  id: 5,
-  title: "Python Full-Stack Development",
-  description: "Backend & Full-Stack development with Python",
-  syllabus: [
-    "Week 1: Python Basics\n• Day 1: Introduction to Python, setup, IDEs, variables, data types\n• Day 2: Operators, expressions, input/output\n• Day 3: Conditional statements (if-else)\n• Day 4: Loops (for, while), break & continue\n• Day 5: Functions, parameters, return values\n• Day 6: Modules & packages\n• Day 7: Revision & mini project (Simple calculator)",
-
-    "Week 2: Data Structures & OOP\n• Day 8: Lists, tuples, sets\n• Day 9: Dictionaries, looping through collections\n• Day 10: Strings & string methods\n• Day 11: File handling (read/write)\n• Day 12: Exception handling\n• Day 13: Classes and objects, constructors\n• Day 14: Inheritance, polymorphism, encapsulation & mini project",
-
-    "Week 3: Advanced Python\n• Day 15: Decorators & lambda functions\n• Day 16: Generators & iterators\n• Day 17: Context managers & with statement\n• Day 18: Regular expressions\n• Day 19: Working with JSON and CSV\n• Day 20: Logging & debugging\n• Day 21: Mini project (Data parser / File manager)",
-
-    "Week 4: Backend Development (Flask/Django)\n• Day 22: Introduction to web development & Flask/Django setup\n• Day 23: Routing & templates\n• Day 24: Forms, validation & static files\n• Day 25: Database setup: SQL (SQLite/PostgreSQL)\n• Day 26: CRUD operations & ORM\n• Day 27: REST API basics\n• Day 28: Mini project (Simple Blog API)",
-
-    "Week 5: Frontend Basics & Integration\n• Day 29: HTML5 & CSS3 basics\n• Day 30: JavaScript basics & DOM manipulation\n• Day 31: AJAX & Fetch API\n• Day 32: Connecting frontend with backend (API calls)\n• Day 33: React.js basics (components, props, state)\n• Day 34: Forms & events in React\n• Day 35: Mini project (To-do App frontend + backend integration)",
-
-    "Week 6: Full-Stack Projects & Deployment\n• Day 36: Advanced CRUD project structure\n• Day 37: Authentication & session management\n• Day 38: Advanced project: E-commerce or Chat app setup\n• Day 39: Deployment to Heroku/AWS\n• Day 40: Docker basics & environment setup\n• Day 41: Testing & debugging\n• Day 42: Final project presentation & course wrap-up"
-  ],
-},
-
-
+    id: 3,
+    title: "Data Science",
+    description: "Master data science concepts, machine learning, and data visualization using Python (4.5 Months, 5 Days/Week).",
+    syllabus: [
+      "Week 1 - Python Basics for Data Science\n• Day 1: Introduction to Python, Installation, IDE Setup, Syntax\n• Day 2: Data Types, Variables, Operators\n• Day 3: Conditional Statements, Loops\n• Day 4: Functions, Recursion\n• Day 5: Modules, Packages, Exception Handling",
+      "Week 2 - Python for Data Handling\n• Day 6: Lists, Tuples, Dictionaries, Sets\n• Day 7: String Handling & Regular Expressions\n• Day 8: File Handling (CSV, TXT)\n• Day 9: Comprehensions, Lambda, Map, Filter, Reduce\n• Day 10: Introduction to NumPy – Arrays, Operations",
+      "Week 3 - Data Manipulation with Pandas\n• Day 11: Pandas Series & DataFrames Basics\n• Day 12: Data Cleaning – Handling Missing Values, Duplicates\n• Day 13: Data Transformation – Sorting, Filtering, GroupBy\n• Day 14: Merging, Joining, Concatenation\n• Day 15: Time Series Basics with Pandas",
+      "Week 4 - Data Visualization\n• Day 16: Matplotlib Basics – Plots, Labels, Legends\n• Day 17: Seaborn – Statistical Plots, Heatmaps, Pairplots\n• Day 18: Advanced Visualizations – Boxplots, Violinplots\n• Day 19: Interactive Visualizations – Plotly Basics\n• Day 20: Visualization Project – Exploratory Data Analysis",
+      "Weeks 5-6 - Statistics & Probability\n• Day 21-25: Descriptive Statistics, Probability Concepts, Distributions\n• Day 26-30: Inferential Statistics – Hypothesis Testing, Confidence Intervals",
+      "Weeks 7-8 - SQL & Databases\n• Day 31-35: SQL Basics – SELECT, WHERE, GROUP BY, Joins\n• Day 36-40: Subqueries, Views, Indexes, Functions\n• Day 41-45: Python DB Integration – sqlite3, MySQL Connector",
+      "Weeks 9-10 - Machine Learning Basics\n• Day 46-50: Introduction to Machine Learning, Types (Supervised/Unsupervised)\n• Day 51-55: Linear Regression, Logistic Regression\n• Day 56-60: Decision Trees, Random Forest, KNN",
+      "Weeks 11-12 - Advanced Machine Learning\n• Day 61-65: Support Vector Machines, Naive Bayes\n• Day 66-70: Clustering – K-Means, Hierarchical\n• Day 71-75: Dimensionality Reduction – PCA, t-SNE\n• Day 76-80: Model Evaluation – Cross Validation, Confusion Matrix, ROC",
+      "Weeks 13-15 - Deep Learning & NLP\n• Day 81: Introduction to Neural Networks, Perceptron\n• Day 82: TensorFlow/Keras Basics\n• Day 83: Building Simple Neural Networks\n• Day 84: CNN Basics for Image Data\n• Day 85: RNN/LSTM Basics for Sequential Data\n• Day 86-90: NLP – Text Preprocessing, Sentiment Analysis",
+      "Weeks 16-17 - Capstone Project\n• Day 91-95: Project Setup, Data Collection, Data Cleaning\n• Day 96-100: Model Building, Evaluation, Visualization, Deployment (Optional Streamlit/Flask)"
+    ]
+  },
   {
-  id: 6,
-  title: "Java Full-Stack Development",
-  description: "Backend & Full-Stack development with Java",
-  syllabus: [
-    "Week 1: Java Basics\n• Day 1: Introduction to Java, JDK/JRE setup, IDEs\n• Day 2: Data types, variables, operators\n• Day 3: Conditional statements (if-else, switch)\n• Day 4: Loops (for, while, do-while)\n• Day 5: Methods & parameters\n• Day 6: Arrays & String handling\n• Day 7: Revision & mini project (Simple Calculator)",
-
-    "Week 2: Object-Oriented Programming (OOP)\n• Day 8: Classes & objects, constructors\n• Day 9: Inheritance & method overriding\n• Day 10: Polymorphism & encapsulation\n• Day 11: Abstraction & interfaces\n• Day 12: Packages & access modifiers\n• Day 13: Exception handling\n• Day 14: Mini project (Library Management System)",
-
-    "Week 3: Advanced Java\n• Day 15: Collections framework (List, Set, Map)\n• Day 16: Generics & iterators\n• Day 17: File handling (Text, CSV, JSON)\n• Day 18: Multithreading basics\n• Day 19: Streams & Lambda expressions\n• Day 20: Java 8 features\n• Day 21: Mini project (File parser / Data handler)",
-
-    "Week 4: Backend Development with Spring Boot\n• Day 22: Introduction to Spring Boot, setup, project structure\n• Day 23: RESTful APIs with Spring Boot\n• Day 24: Database integration: MySQL/PostgreSQL, JPA & Hibernate\n• Day 25: CRUD operations using Spring Data JPA\n• Day 26: Authentication & Authorization (Spring Security basics)\n• Day 27: Exception handling & logging\n• Day 28: Mini project (Employee Management API)",
-
-    "Week 5: Frontend Basics & Integration\n• Day 29: HTML5 & CSS3\n• Day 30: JavaScript & DOM manipulation\n• Day 31: AJAX & Fetch API\n• Day 32: React.js basics (components, props, state)\n• Day 33: Connecting React with Spring Boot APIs\n• Day 34: Forms & event handling in React\n• Day 35: Mini project (To-do App frontend + backend integration)",
-
-    "Week 6: Full-Stack Projects & Deployment\n• Day 36: Advanced project setup (E-commerce or Inventory App)\n• Day 37: Session management & JWT authentication\n• Day 38: File uploads & download features\n• Day 39: Deployment to Heroku / AWS\n• Day 40: Docker basics & containerization\n• Day 41: Testing & debugging (JUnit, Postman)\n• Day 42: Final project presentation & course wrap-up"
-  ],
-},
-{
-  id: 7,
-  title: "Software Testing",
-  description: "Learn manual and automation testing, CI/CD integration, and best practices",
-  syllabus: [
-    "Week 1: Introduction to Software Testing\n• Day 1: Introduction to software testing, SDLC, STLC\n• Day 2: Types of testing: Manual vs Automation, Functional vs Non-functional\n• Day 3: Test planning, test strategy, and test case writing\n• Day 4: Test design techniques (Boundary value, Equivalence partitioning)\n• Day 5: Bug lifecycle & defect reporting\n• Day 6: Testing tools overview\n• Day 7: Mini project: Write test cases for a sample application",
-
-    "Week 2: Manual Testing\n• Day 8: Requirement analysis & test scenario creation\n• Day 9: Test case execution & logging defects\n• Day 10: Smoke, Sanity, Regression, and Integration testing\n• Day 11: User Acceptance Testing (UAT) & system testing\n• Day 12: Exploratory testing techniques\n• Day 13: Test management tools (JIRA, TestRail)\n• Day 14: Mini project: Execute test cases and log defects in JIRA",
-
-    "Week 3: Basics of Automation Testing\n• Day 15: Introduction to automation testing, benefits, and tools\n• Day 16: Selenium WebDriver overview & setup\n• Day 17: Locators, web element interactions\n• Day 18: Handling dropdowns, alerts, frames, and windows\n• Day 19: TestNG basics: annotations, suites, and reports\n• Day 20: Maven/Gradle integration & project structure\n• Day 21: Mini project: Automate login and form submission",
-
-    "Week 4: Advanced Automation Testing\n• Day 22: Page Object Model (POM) design pattern\n• Day 23: Data-driven testing with Excel/CSV/JSON\n• Day 24: Handling waits, synchronization, and exceptions\n• Day 25: Cross-browser testing & Selenium Grid\n• Day 26: Introduction to API testing (Postman basics)\n• Day 27: REST API testing using RestAssured\n• Day 28: Mini project: Automate a web application with POM and API tests",
-
-    "Week 5: CI/CD & DevOps for Testing\n• Day 29: Introduction to CI/CD pipelines\n• Day 30: Integrating automation tests in Jenkins pipeline\n• Day 31: Running automated tests in CI/CD pipelines\n• Day 32: Reporting & logs in CI/CD\n• Day 33: Introduction to Docker for test environments\n• Day 34: Test environment setup & containerization basics\n• Day 35: Mini project: CI/CD pipeline with automated testing",
-
-    "Week 6: Advanced Testing & Projects\n• Day 36: Performance testing basics (JMeter or LoadRunner)\n• Day 37: Security testing basics\n• Day 38: Mobile testing basics (Appium)\n• Day 39: Automation framework best practices\n• Day 40: Test reporting & metrics\n• Day 41: Debugging & troubleshooting automation scripts\n• Day 42: Final project presentation: End-to-end testing of a sample application"
-  ],
-},
-{
-  id: 8,
-  title: "Spring Boot Full-Stack Development",
-  description: "Learn Spring Boot backend development with frontend integration (React/Angular)",
-  syllabus: [
-    "Week 1: Introduction & Core Java Recap\n• Day 1: Introduction to Spring Boot, setup, and project structure\n• Day 2: Core Java recap (OOP, collections, exception handling)\n• Day 3: Introduction to Maven & Gradle\n• Day 4: Spring Boot starter projects and dependencies\n• Day 5: Application.properties & YAML configuration\n• Day 6: Spring Boot annotations overview (@RestController, @Service, @Repository)\n• Day 7: Mini project: Hello World REST API",
-
-    "Week 2: Dependency Injection & Spring Core\n• Day 8: Inversion of Control (IoC) & Dependency Injection (DI)\n• Day 9: Spring Beans & Bean lifecycle\n• Day 10: Component scanning and autowiring\n• Day 11: Profiles & environment-based configuration\n• Day 12: Exception handling in Spring Boot\n• Day 13: Logging & debugging in Spring Boot\n• Day 14: Mini project: Service layer with DI",
-
-    "Week 3: REST API Development\n• Day 15: Introduction to REST architecture\n• Day 16: CRUD operations with Spring Boot\n• Day 17: RequestMapping, PathVariable, RequestParam\n• Day 18: RequestBody & ResponseEntity\n• Day 19: HATEOAS & versioning REST APIs\n• Day 20: Exception handling & validation (@Valid, @ExceptionHandler)\n• Day 21: Mini project: REST API for a simple library system",
-
-    "Week 4: Database Integration & JPA\n• Day 22: Introduction to relational databases (MySQL/PostgreSQL)\n• Day 23: Spring Data JPA setup & repository interfaces\n• Day 24: Entities, primary keys, and relationships (OneToOne, OneToMany, ManyToMany)\n• Day 25: JPQL & custom queries\n• Day 26: Transactions & pagination\n• Day 27: Data validation & constraints\n• Day 28: Mini project: CRUD operations with database integration",
-
-    "Week 5: Security & Advanced Features\n• Day 29: Introduction to Spring Security\n• Day 30: Authentication & Authorization (JWT basics)\n• Day 31: Role-based access control\n• Day 32: Password encoding & user registration/login\n• Day 33: CORS, filters, and interceptors\n• Day 34: Scheduling tasks & asynchronous processing\n• Day 35: Mini project: Secure REST API with JWT",
-
-    "Week 6: Frontend Integration & Projects\n• Day 36: Introduction to frontend integration (React/Angular basics)\n• Day 37: Connecting frontend with Spring Boot APIs\n• Day 38: Handling forms & validations in frontend\n• Day 39: File uploads & download APIs\n• Day 40: Exception handling & global error handling\n• Day 41: Deployment to Heroku/AWS\n• Day 42: Final project: Full-stack Spring Boot + React application"
-  ],
-},
-{
-  id: 9,
-  title: "Aptitude & Reasoning",
-  description: "Prepare for interviews and competitive exams with aptitude and reasoning skills",
-  syllabus: [
-    "Week 1: Basics of Quantitative Aptitude\n• Day 1: Introduction to Aptitude & Reasoning, importance in interviews/tests\n• Day 2: Number systems, divisibility, LCM, HCF\n• Day 3: Simplification, percentages, profit & loss\n• Day 4: Ratio & proportion, partnership, averages\n• Day 5: Simple & compound interest\n• Day 6: Time, speed, distance\n• Day 7: Mini practice session: Mixed problems",
-
-    "Week 2: Advanced Quantitative Aptitude\n• Day 8: Time & work problems\n• Day 9: Pipes & cisterns\n• Day 10: Mixtures & alligations\n• Day 11: Mensuration (2D & 3D)\n• Day 12: Algebra basics & quadratic equations\n• Day 13: Probability basics\n• Day 14: Mini test: Week 2 problems",
-
-    "Week 3: Logical Reasoning Basics\n• Day 15: Introduction to reasoning & types\n• Day 16: Series (number, alphabet, mixed)\n• Day 17: Analogies & classification\n• Day 18: Coding-decoding\n• Day 19: Directions & distance\n• Day 20: Blood relations & family tree problems\n• Day 21: Mini practice session: Logical puzzles",
-
-    "Week 4: Advanced Logical Reasoning\n• Day 22: Seating arrangements (linear & circular)\n• Day 23: Syllogisms\n• Day 24: Statement & assumptions, conclusions\n• Day 25: Clocks, calendars, and cubes\n• Day 26: Data sufficiency problems\n• Day 27: Puzzles (miscellaneous)\n• Day 28: Mini test: Week 4 problems",
-
-    "Week 5: Data Interpretation & Mixed Problems\n• Day 29: Tables & bar graphs\n• Day 30: Pie charts & line charts\n• Day 31: Caselets & data analysis problems\n• Day 32: Speed, distance & time revision problems\n• Day 33: Profit, loss & percentage problems\n• Day 34: Mixed reasoning puzzles\n• Day 35: Mini practice session: Combined aptitude & reasoning",
-
-    "Week 6: Final Practice & Mock Tests\n• Day 36: Advanced quantitative aptitude problems\n• Day 37: Advanced logical reasoning problems\n• Day 38: Previous year aptitude questions (company-wise)\n• Day 39: Mock Test 1\n• Day 40: Mock Test 2\n• Day 41: Mock Test 3\n• Day 42: Review & doubt clearing session"
-  ],
-},
-{
-  id: 10,
-  title: "HTML & CSS",
-  description: "Learn web development fundamentals with HTML, CSS, responsive design, and best practices",
-  syllabus: [
-    "Week 1: HTML Basics\n• Day 1: Introduction to Web Development, HTML structure, tags, attributes\n• Day 2: Headings, paragraphs, lists (ordered, unordered), line breaks\n• Day 3: Links, images, and multimedia elements\n• Day 4: Tables and forms basics\n• Day 5: HTML5 semantic tags (header, footer, article, section)\n• Day 6: Forms: input types, buttons, textarea, checkboxes, radio buttons\n• Day 7: Mini project: Simple personal webpage",
-
-    "Week 2: CSS Basics\n• Day 8: Introduction to CSS, inline, internal, and external styles\n• Day 9: Selectors, combinators, pseudo-classes, pseudo-elements\n• Day 10: Colors, backgrounds, borders, margin, padding\n• Day 11: Typography: fonts, text alignment, text decoration, line-height\n• Day 12: Box model and positioning (static, relative, absolute, fixed)\n• Day 13: Display and visibility (block, inline, inline-block, none)\n• Day 14: Mini project: Styled personal webpage",
-
-    "Week 3: Advanced CSS\n• Day 15: Flexbox: containers, items, alignment, wrapping\n• Day 16: CSS Grid: rows, columns, grid-template, grid-gap\n• Day 17: Transitions and animations\n• Day 18: CSS transformations (rotate, scale, translate)\n• Day 19: Pseudo-classes and advanced selectors\n• Day 20: Shadow effects (box-shadow, text-shadow)\n• Day 21: Mini project: Responsive card layout",
-
-    "Week 4: Responsive Web Design\n• Day 22: Introduction to responsive design, mobile-first approach\n• Day 23: Media queries basics\n• Day 24: Responsive typography and images\n• Day 25: CSS units (px, %, em, rem, vh, vw)\n• Day 26: Building a responsive navigation bar\n• Day 27: CSS frameworks overview (Bootstrap basics)\n• Day 28: Mini project: Responsive portfolio webpage",
-
-    "Week 5: CSS Advanced Techniques\n• Day 29: Gradients, patterns, and background effects\n• Day 30: CSS variables and custom properties\n• Day 31: Advanced form styling\n• Day 32: CSS pseudo-elements (::before, ::after)\n• Day 33: CSS transitions and hover effects\n• Day 34: Building a responsive grid layout\n• Day 35: Mini project: Landing page with animations",
-
-    "Week 6: Final Projects & Best Practices\n• Day 36: Website structure planning and wireframing\n• Day 37: Building multi-section web pages\n• Day 38: Optimization and performance best practices\n• Day 39: Accessibility basics (ARIA, semantic HTML)\n• Day 40: Cross-browser testing and debugging\n• Day 41: Final project development\n• Day 42: Final project presentation: Complete responsive website"
-  ],
-},
-
-
+    id: 4,
+    title: "Data Analysis",
+    description: "Learn data analysis using Python, Pandas, visualization, SQL integration, and reporting (4.5 Months, 5 Days/Week).",
+    syllabus: [
+      "Week 1 - Python Basics for Data Analysis\n• Day 1: Introduction to Python, IDE Setup, Python Syntax\n• Day 2: Data Types, Variables, Operators\n• Day 3: Conditional Statements and Loops\n• Day 4: Functions, Recursion\n• Day 5: Modules, Packages, Exception Handling",
+      "Week 2 - Python Data Structures & Libraries\n• Day 6: Lists, Tuples, Dictionaries, Sets\n• Day 7: String Handling & Regular Expressions\n• Day 8: File Handling (CSV, TXT)\n• Day 9: Comprehensions, Lambda, Map, Filter, Reduce\n• Day 10: Introduction to NumPy – Arrays, Indexing, Operations",
+      "Week 3 - Data Manipulation with Pandas\n• Day 11: Pandas Series & DataFrames Basics\n• Day 12: Data Cleaning – Missing Values, Duplicates\n• Day 13: Data Transformation – Sorting, Filtering, GroupBy\n• Day 14: Merging, Joining, Concatenation\n• Day 15: Time Series Basics",
+      "Week 4 - Data Visualization\n• Day 16: Matplotlib Basics – Plots, Labels, Legends\n• Day 17: Seaborn – Statistical Plots, Heatmaps\n• Day 18: Advanced Visualizations – Boxplots, Pairplots\n• Day 19: Interactive Visualizations – Plotly, Dash Basics\n• Day 20: Mini Project – Exploratory Data Analysis (EDA)",
+      "Weeks 5-6 - Statistics for Data Analysis\n• Day 21-25: Descriptive Statistics – Mean, Median, Mode, Variance, Standard Deviation\n• Day 26-30: Probability, Probability Distributions, Correlation, Covariance",
+      "Weeks 7-8 - SQL & Database Integration\n• Day 31-35: SQL Basics – SELECT, WHERE, GROUP BY, Joins\n• Day 36-40: Subqueries, Indexes, Views, Functions\n• Day 41-45: Python Integration with SQL – sqlite3, MySQL connector, Query Execution",
+      "Weeks 9-10 - Data Analysis Techniques\n• Day 46-50: Handling Large Datasets – Pandas & NumPy optimization\n• Day 51-55: Data Aggregation, Pivot Tables\n• Day 56-60: Outlier Detection, Missing Data Imputation, Feature Engineering",
+      "Weeks 11-12 - Advanced Visualization & Reporting\n• Day 61-65: Advanced Seaborn & Matplotlib – Multi-panel plots, Customization\n• Day 66-70: Interactive Dashboards – Plotly/Dash Basics\n• Day 71-75: Excel Integration with Python (Openpyxl, XlsxWriter)\n• Day 76-80: Automated Reports – PDF, Excel, Email",
+      "Weeks 13-15 - Intro to Machine Learning for Analysis\n• Day 81: ML Overview for Data Analysis\n• Day 82: Linear Regression, Correlation Analysis\n• Day 83: Logistic Regression & Classification Basics\n• Day 84: Clustering Basics – K-Means, Hierarchical\n• Day 85: Model Evaluation – Accuracy, Precision, Recall\n• Day 86-90: ML Mini Project – Predictive Analysis",
+      "Weeks 16-17 - Capstone Project\n• Day 91-95: Project Selection, Data Collection, Cleaning\n• Day 96-100: Data Analysis, Visualization, Reporting & Presentation"
+    ]
+  },
+  {
+    id: 5,
+    title: "Power BI Full Course",
+    description: "Learn Power BI for business intelligence, reporting, dashboards, DAX, and advanced analytics (4.5 Months, 5 Days/Week).",
+    syllabus: [
+      "Week 1 - Introduction to Power BI\n• Day 1: Introduction to Business Intelligence, Power BI Overview, Installation\n• Day 2: Power BI Desktop Interface, Getting Started with Reports\n• Day 3: Connecting to Data Sources (Excel, CSV, SQL, Web)\n• Day 4: Data Types, Data Preview, Data Transformations\n• Day 5: Import vs DirectQuery, Data Refresh Basics",
+      "Week 2 - Power Query & Data Transformation\n• Day 6: Power Query Editor Overview\n• Day 7: Data Cleaning – Remove Duplicates, Missing Values\n• Day 8: Transformations – Split, Merge, Pivot, Unpivot\n• Day 9: Data Types, Formatting, and Column Management\n• Day 10: Advanced Query Editor – Conditional Columns, Custom Columns",
+      "Week 3 - Data Modeling Basics\n• Day 11: Introduction to Data Modeling\n• Day 12: Relationships – One-to-One, One-to-Many, Many-to-Many\n• Day 13: Star Schema & Snowflake Schema Basics\n• Day 14: Table Management, Calculated Columns\n• Day 15: Data Modeling Best Practices",
+      "Week 4 - DAX Basics\n• Day 16: Introduction to DAX, Calculated Columns vs Measures\n• Day 17: Basic DAX Functions – SUM, AVERAGE, COUNT, DISTINCT\n• Day 18: Logical & Date Functions\n• Day 19: Filter Context & Row Context\n• Day 20: Time Intelligence Functions (YTD, QTD, MTD)",
+      "Weeks 5-6 - Advanced DAX & Analytics\n• Day 21-25: Advanced DAX – CALCULATE, ALL, RELATED, LOOKUPVALUE\n• Day 26-30: Advanced Calculations – Running Totals, Percentage of Total, Ranking",
+      "Weeks 7-8 - Visualization Basics\n• Day 31-35: Introduction to Power BI Visuals – Bar, Column, Line, Pie\n• Day 36-40: Tables, Matrices, Cards, KPI Visuals\n• Day 41-45: Conditional Formatting, Tooltips, Drillthrough",
+      "Weeks 9-10 - Advanced Visualization & Custom Visuals\n• Day 46-50: Slicers, Filters, Bookmarks, Buttons\n• Day 51-55: Drill Down & Hierarchies, Visual Interactions\n• Day 56-60: Custom Visuals from Marketplace, Themes & Templates",
+      "Weeks 11-12 - Power BI Service & Dashboards\n• Day 61-65: Introduction to Power BI Service\n• Day 66-70: Publishing Reports, Workspaces, Apps\n• Day 71-75: Dashboards – Tiles, Pinning, Real-time Data\n• Day 76-80: Data Gateway, Scheduled Refresh, Sharing & Collaboration",
+      "Weeks 13-15 - Advanced Analytics & Integrations\n• Day 81: What-If Analysis, Parameters\n• Day 82: Q&A Visuals, Natural Language Queries\n• Day 83: R & Python Integration for Visuals\n• Day 84: Power BI with Excel, Power Query Integration\n• Day 85: Power BI with SQL Server & Cloud Sources\n• Day 86-90: Analytics Mini Project – Interactive Report Creation",
+      "Weeks 16-17 - Capstone Project\n• Day 91-95: Project Planning, Dataset Preparation\n• Day 96-100: Full Project – Data Cleaning, Modeling, DAX, Visualization, Publishing Dashboard"
+    ]
+  },
+  {
+    id: 6,
+    title: "Full Stack Java Developer",
+    description: "Learn Java, Spring Boot, Hibernate, SQL, and React for full stack development (4.5 Months, 5 Days/Week).",
+    syllabus: [
+      "Week 1 Core Java Basics\n• Day 1: Introduction to Java, JDK/JRE, Syntax, Data types, Variables\n• Day 2: Operators, Control statements (if, switch, loops)\n• Day 3: Methods, Recursion, Arrays\n• Day 4: Strings, StringBuffer, StringBuilder\n• Day 5: OOP Basics Classes, Objects, Constructors",
+      "Week 2- Java OOPs\n• Day 6: Inheritance, super/this keywords\n• Day 7: Polymorphism (Overloading/Overriding)\n• Day 8: Abstraction, Interfaces\n• Day 9: Encapsulation, Access Modifiers, Packages\n• Day 10: Exception Handling",
+      "Week 3 Collections Framework\n• Day 11: Introduction to Collections, Set\n• Day 12: List\n• Day 13: Map, HashMap, TreeMap\n• Day 14: Wrapper Classes\n• Day 15: Lambda Expressions",
+      "Week 4 - Advanced Java\n• Day 16: Multithreading Basics\n• Day 17-20: Synchronization, Thread Lifecycle",
+      "Weeks 5-6-SQL + JDBC\n• Day 21-30: SQL Basics, Joins, Subqueries, Functions, operators, DML, DQL, DCL, TCL, DDL commands",
+      "Weeks 7-8-Hibernate / JPA\n• Day 31-35: Hibernate Basics, ORM Mapping\n• Day 36-40: Relationships (OneToOne, OneToMany, ManyToMany)\n• Day 41-45: HQL, Criteria API",
+      "Weeks 9-12-Spring Boot\n• Day 46-50: Spring Boot Basics, Dependency Injection\n• Day 51-60: REST APIs, CRUD\n• Day 61-70: Spring Data JPA, Validation",
+      "Weeks 13-14- Frontend Basics (HTML, CSS, JavaScript)\n• Day 71-75: HTML Basics, Forms, Semantic tags, Non-semantic tags, Tables, Forms, Media tags, HTML text formatting tags\n• Day 76-80: Animation tags, types of CSS, types of selectors, CSS Flexbox, Grid, Animations, Media Queries\n• Day 81-85: JavaScript Basics, types of functions DOM, Events, Promises\n• Day 86-90: ES6, Fetch API, Async JS",
+      "Weeks 15-17- React.js\n• Day 91: React Introduction, Components\n• Day 92: JSX, Props, State\n• Day 93: Events, Forms\n• Day 94: Hooks (useState, useEffect)\n• Day 95: React Router, API Integration\n• Day 96-100: React Project (Frontend)"
+    ]
+  }
 ];

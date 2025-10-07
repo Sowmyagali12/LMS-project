@@ -1,8 +1,8 @@
 // src/pages/dashboard/Courses.jsx
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { courses } from "../../components/coursesData";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useProgress } from "../../context/ProgressContext";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -12,7 +12,49 @@ const cardVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const CourseCard = ({ course, status, updateProgress }) => {
+// Animated Progress Bar using useRef (no ESLint warning)
+const ProgressBar = ({ progress }) => {
+  const controls = useAnimation();
+  const [displayProgress, setDisplayProgress] = useState(0);
+  const displayRef = useRef(0);
+
+  useEffect(() => {
+    // Animate the bar width
+    controls.start({ width: `${progress}%`, transition: { duration: 0.8, ease: "easeOut" } });
+
+    const duration = 800;
+    const steps = duration / 16;
+    const increment = (progress - displayRef.current) / steps;
+
+    const interval = setInterval(() => {
+      displayRef.current += increment;
+      if ((increment > 0 && displayRef.current >= progress) || (increment < 0 && displayRef.current <= progress)) {
+        displayRef.current = progress;
+        setDisplayProgress(progress);
+        clearInterval(interval);
+      } else {
+        setDisplayProgress(Math.round(displayRef.current));
+      }
+    }, 16);
+
+    return () => clearInterval(interval);
+  }, [progress, controls]);
+
+  return (
+    <div className="mt-4">
+      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+        <motion.div
+          className="h-3 rounded-full bg-gradient-to-r from-blue-400 to-blue-600"
+          initial={{ width: 0 }}
+          animate={controls}
+        />
+      </div>
+      <p className="text-sm text-gray-600 mt-1">{displayProgress}% completed</p>
+    </div>
+  );
+};
+
+const CourseCard = ({ course, status, progress, updateProgress, courseProgress }) => {
   const navigate = useNavigate();
 
   const statusColors = {
@@ -25,7 +67,7 @@ const CourseCard = ({ course, status, updateProgress }) => {
     if (status === "not-started") {
       return (
         <button
-          onClick={() => updateProgress(course.id, "in-progress")}
+          onClick={() => updateProgress(course.id, "in-progress", [])}
           className="px-4 py-2 rounded-full bg-blue-100 text-blue-800 hover:bg-blue-200 transition"
         >
           Start Course
@@ -34,12 +76,26 @@ const CourseCard = ({ course, status, updateProgress }) => {
     }
 
     if (status === "in-progress") {
+      const isFullyCompleted =
+        courseProgress?.completedWeeks?.length === course.syllabus.length;
+
       return (
         <button
-          onClick={() => updateProgress(course.id, "completed")}
-          className="px-4 py-2 rounded-full bg-green-100 text-green-800 hover:bg-green-200 transition"
+          onClick={() =>
+            updateProgress(
+              course.id,
+              "completed",
+              Array.from({ length: course.syllabus.length }, (_, i) => i)
+            )
+          }
+          className={`px-4 py-2 rounded-full transition ${
+            isFullyCompleted
+              ? "bg-gray-300 text-gray-700 cursor-not-allowed"
+              : "bg-green-100 text-green-800 hover:bg-green-200"
+          }`}
+          disabled={isFullyCompleted}
         >
-          Mark Completed
+          {isFullyCompleted ? "Completed" : "Mark Completed"}
         </button>
       );
     }
@@ -65,6 +121,8 @@ const CourseCard = ({ course, status, updateProgress }) => {
         <p className="text-gray-600 mt-2">{course.description}</p>
       </div>
 
+      <ProgressBar progress={progress} />
+
       <div className="mt-4 flex flex-wrap gap-2 justify-between items-center">
         <button
           onClick={() => navigate(`/course/${course.id}/syllabus`)}
@@ -79,7 +137,7 @@ const CourseCard = ({ course, status, updateProgress }) => {
 };
 
 const Courses = () => {
-  const { coursesProgress, updateProgress } = useProgress();
+  const { coursesProgress, updateCourseProgress } = useProgress();
   const navigate = useNavigate();
 
   const staggerDelay = window.innerWidth >= 1024 ? 0.1 : 0.15;
@@ -89,9 +147,18 @@ const Courses = () => {
     show: { transition: { staggerChildren: staggerDelay } },
   };
 
+  const calculateProgress = (course, courseProgress) => {
+    if (!courseProgress || !course.syllabus || course.syllabus.length === 0) return 0;
+
+    const totalWeeks = course.syllabus.length;
+    const completed = courseProgress.completedWeeks?.length || 0;
+    const progress = Math.round((completed / totalWeeks) * 100);
+
+    return Math.min(Math.max(progress, 0), 100);
+  };
+
   return (
     <div className="pt-20 px-6 pb-8 min-h-screen bg-blue-50 max-w-[1200px] mx-auto relative">
-      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-6 left-6 p-2 rounded-full hover:bg-blue-100 transition z-50"
@@ -107,14 +174,22 @@ const Courses = () => {
         animate="show"
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {courses.map((course) => (
-          <CourseCard
-            key={course.id}
-            course={course}
-            status={coursesProgress[course.id] || "not-started"}
-            updateProgress={updateProgress}
-          />
-        ))}
+        {courses.map((course) => {
+          const courseProgress = coursesProgress[course.id];
+          const status = courseProgress?.status || "not-started";
+          const progress = calculateProgress(course, courseProgress);
+
+          return (
+            <CourseCard
+              key={course.id}
+              course={course}
+              status={status}
+              progress={progress}
+              updateProgress={updateCourseProgress}
+              courseProgress={courseProgress}
+            />
+          );
+        })}
       </motion.div>
     </div>
   );

@@ -9,11 +9,17 @@ export const useProgress = () => useContext(ProgressContext);
 
 // 3️⃣ Provider Component
 export const ProgressProvider = ({ children }) => {
-  // Courses progress: "not-started" | "in-progress" | "completed"
+  // Courses progress:
+  // {
+  //   [courseId]: {
+  //      status: "not-started" | "in-progress" | "completed",
+  //      completedWeeks: [0,1,2] // array of week indices completed
+  //   }
+  // }
   const [coursesProgress, setCoursesProgress] = useState({
-    1: "not-started",
-    2: "in-progress",
-    3: "completed",
+    1: { status: "not-started", completedWeeks: [] },
+    2: { status: "in-progress", completedWeeks: [0] }, // example: week 0 done
+    3: { status: "completed", completedWeeks: [0, 1, 2, 3] },
   });
 
   // Assignments progress: "pending" | "completed"
@@ -22,12 +28,18 @@ export const ProgressProvider = ({ children }) => {
     2: "completed",
   });
 
-  // Update course progress by course ID
-  const updateCourseProgress = (courseId, status) => {
-    setCoursesProgress((prev) => ({ ...prev, [courseId]: status }));
+  // ✅ Update course progress
+  const updateCourseProgress = (courseId, status, completedWeeks = []) => {
+    setCoursesProgress((prev) => ({
+      ...prev,
+      [courseId]: {
+        status,
+        completedWeeks,
+      },
+    }));
   };
 
-  // Update assignment progress by assignment ID
+  // ✅ Update assignment progress
   const updateAssignmentProgress = (assignmentId, status) => {
     setAssignmentsProgress((prev) => ({ ...prev, [assignmentId]: status }));
   };

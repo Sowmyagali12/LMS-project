@@ -7,8 +7,8 @@ const StudentContext = createContext();
 // Create the provider
 const StudentProvider = ({ children }) => {
   const [student, setStudent] = useState({
-    name: "Bharath",
-    email: "bharath@example.com",
+    name: "gurram",
+    email: "gurram@example.com",
     phone: "1234567890",
     currentCity: "Hyderabad",
     currentState: "Telangana",

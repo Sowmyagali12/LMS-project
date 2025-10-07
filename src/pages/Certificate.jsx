@@ -115,7 +115,7 @@ const CertificatePage = () => {
         <div style={{ position: "absolute", left: "-9999px", top: 0 }}>
           <CertificateTemplate
             ref={downloadRef}
-            name="Boddu Bharath"
+            name="gurram"
             course={downloadCert.title}
             startDate="01 Sep 2025"
             endDate={downloadCert.date}
@@ -134,7 +134,8 @@ const CertificatePage = () => {
               &times;
             </button>
             <CertificateTemplate
-              name="Boddu Bharath"
+              name="gurram
+              "
               course={modalCert.title}
               startDate="01 Sep 2025"
               endDate={modalCert.date}

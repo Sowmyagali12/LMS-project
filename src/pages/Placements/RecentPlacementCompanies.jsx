@@ -16,7 +16,7 @@ const RecentPlacementCompanies = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen relative">
+    <div className="p-6 bg-gray-50 min-h-screen relative">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
@@ -29,7 +29,7 @@ const RecentPlacementCompanies = () => {
       {/* Header */}
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          🏢 Recently Placed Companies
+          Recently Placed Companies
         </h1>
         <p className="text-gray-600">
           These are some of the companies where our students were recently placed.
@@ -41,12 +41,12 @@ const RecentPlacementCompanies = () => {
         {companies.map((company, index) => (
           <div
             key={index}
-            className="rounded-lg shadow-md p-6 flex items-center justify-center
-              bg-gradient-to-r from-[#0F172A] via-[#1E3A8A] to-[#3B82F6] 
-              hover:from-[#1E40AF] hover:via-[#1D4ED8] hover:to-[#2563EB] 
-              transition-all duration-300 cursor-pointer"
+            className="rounded-xl p-6 flex items-center justify-center
+              bg-gradient-to-tr from-green-100 via-blue-100 to-purple-100
+              shadow-md transform transition-all duration-300
+              hover:scale-105 hover:shadow-xl cursor-pointer"
           >
-            <h2 className="text-xl font-semibold text-white">{company}</h2>
+            <h2 className="text-xl font-semibold text-gray-800 text-center">{company}</h2>
           </div>
         ))}
       </div>

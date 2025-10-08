@@ -1,3 +1,4 @@
+// src/pages/dashboard/Internship.jsx
 import React from "react";
 import { FaBriefcase, FaCalendarAlt, FaArrowLeft } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -46,7 +47,7 @@ const Internship = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h1 className="text-5xl font-extrabold mb-3 text-blue-900 drop-shadow-sm">
+        <h1 className="text-5xl font-extrabold mb-3 !text-black drop-shadow-sm">
           Internships
         </h1>
         <p className="text-blue-700 text-lg max-w-2xl mx-auto">
@@ -77,7 +78,7 @@ const Internship = () => {
                     className="w-10 h-10 object-contain"
                   />
                 </div>
-                <h2 className="text-2xl font-semibold text-gray-800">
+                <h2 className="text-2xl font-semibold !text-black">
                   {intern.company}
                 </h2>
               </div>

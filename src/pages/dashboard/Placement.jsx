@@ -1,6 +1,7 @@
+// src/pages/dashboard/Placement.jsx
 import React from "react";
-import { FaArrowLeft, FaGlobe } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { FaGlobe, FaArrowLeft } from "react-icons/fa";
 
 const companies = [
   {
@@ -37,17 +38,17 @@ const Placement = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50 p-8 relative">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 p-2 rounded-full hover:bg-gray-200 transition z-50"
+        className="absolute top-6 left-6 p-2 rounded-full hover:bg-blue-100 transition z-50"
       >
-        <FaArrowLeft className="text-gray-700 w-5 h-5" />
+        <FaArrowLeft className="text-blue-600 w-6 h-6" />
       </button>
 
       {/* Header */}
-      <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-gray-800">
+      <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center !text-black">
         Our Partner Companies
       </h1>
 
@@ -63,7 +64,7 @@ const Placement = () => {
               className="bg-white rounded-xl shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 p-6 border border-gray-200 cursor-pointer flex flex-col justify-between"
             >
               <div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                <h2 className="text-xl font-semibold !text-black mb-2">
                   {company.name}
                 </h2>
                 <p className="text-gray-600 text-sm mb-1">
@@ -73,7 +74,8 @@ const Placement = () => {
                   <span className="font-medium">Industry:</span> {company.type}
                 </p>
                 <p className="text-gray-600 text-sm">
-                  <span className="font-medium">Established:</span> {company.established}
+                  <span className="font-medium">Established:</span>{" "}
+                  {company.established}
                 </p>
               </div>
               <a

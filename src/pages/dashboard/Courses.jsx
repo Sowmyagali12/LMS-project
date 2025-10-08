@@ -28,7 +28,10 @@ const ProgressBar = ({ progress }) => {
 
     const interval = setInterval(() => {
       displayRef.current += increment;
-      if ((increment > 0 && displayRef.current >= progress) || (increment < 0 && displayRef.current <= progress)) {
+      if (
+        (increment > 0 && displayRef.current >= progress) ||
+        (increment < 0 && displayRef.current <= progress)
+      ) {
         displayRef.current = progress;
         setDisplayProgress(progress);
         clearInterval(interval);
@@ -166,7 +169,10 @@ const Courses = () => {
         <FaArrowLeft className="text-blue-600 w-6 h-6" />
       </button>
 
-      <h1 className="text-4xl font-bold text-blue-600 mb-8">Courses</h1>
+      {/* Increased heading size */}
+      <h1 className="text-5xl font-extrabold text-black mb-10 drop-shadow-lg text-center">
+        Courses
+      </h1>
 
       <motion.div
         variants={containerVariants}

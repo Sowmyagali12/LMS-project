@@ -1,3 +1,4 @@
+// src/pages/dashboard/Placements.jsx
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaBriefcase, FaBuilding } from "react-icons/fa";
@@ -10,7 +11,7 @@ const Placements = () => {
     {
       title: "Job Portal",
       description: "Explore job opportunities and apply directly.",
-      icon: <FaBriefcase size={22} className="text-indigo-600" />,
+      icon: <FaBriefcase size={22} />, // removed color
       link: "/placements/job-portal",
       bg: "from-indigo-100 to-blue-50",
       hover: "hover:shadow-indigo-300",
@@ -18,7 +19,7 @@ const Placements = () => {
     {
       title: "Recent Placement Companies",
       description: "Check out companies where students were placed recently.",
-      icon: <FaBuilding size={22} className="text-teal-600" />,
+      icon: <FaBuilding size={22} />, // removed color
       link: "/placements/recent-placement-companies",
       bg: "from-teal-100 to-green-50",
       hover: "hover:shadow-teal-300",
@@ -45,8 +46,8 @@ const Placements = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-900 drop-shadow-sm mb-2">
-        Placements
+        <h1 className="text-4xl sm:text-5xl font-extrabold !text-black drop-shadow-sm mb-2">
+          Placements
         </h1>
         <p className="text-blue-700 text-sm md:text-base">
           Explore placement opportunities and job portals.
@@ -77,15 +78,15 @@ const Placements = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.2 + 0.3 }}
               >
-                <div className="p-4 bg-white rounded-full shadow-sm">
+                <div className="p-4 bg-white rounded-full shadow-sm text-gray-800">
                   {card.icon}
                 </div>
               </motion.div>
               <div className="mt-4">
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold !text-black">
                   {card.title}
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-700 mt-1">
                   {card.description}
                 </p>
               </div>

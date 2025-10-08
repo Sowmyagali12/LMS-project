@@ -119,7 +119,7 @@ const ResumeBuilder = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h1 className="text-5xl font-extrabold mb-3 text-blue-900 drop-shadow-sm">
+        <h1 className="text-5xl font-extrabold mb-3 text-black drop-shadow-sm">
           AI Resume Builder
         </h1>
         <p className="text-blue-700 text-lg max-w-2xl mx-auto">
@@ -135,7 +135,7 @@ const ResumeBuilder = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold text-blue-800 mb-6 border-b border-gray-200 pb-3">
+          <h2 className="text-2xl font-bold text-black mb-6 border-b border-gray-200 pb-3">
             ✍️ Enter Your Details
           </h2>
           <form className="space-y-5">
@@ -193,7 +193,7 @@ const ResumeBuilder = () => {
             exit="exit"
             variants={previewVariants}
           >
-            <h2 className="text-2xl font-bold text-blue-800 mb-6 border-b border-gray-200 pb-3">
+            <h2 className="text-2xl font-bold text-black mb-6 border-b border-gray-200 pb-3">
               AI-Generated Resume
             </h2>
             <div className="prose max-w-none text-gray-800 whitespace-pre-wrap leading-relaxed">

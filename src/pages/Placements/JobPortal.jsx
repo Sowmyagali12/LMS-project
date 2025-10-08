@@ -27,7 +27,7 @@ const JobPortal = () => {
 
       {/* Header */}
       <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">💼 Job Portal</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">Job Portal</h1>
         <p className="text-gray-600">
           Explore current job opportunities available for our students. Click “Apply” to proceed.
         </p>
@@ -48,7 +48,7 @@ const JobPortal = () => {
             {jobs.map((job, index) => (
               <tr
                 key={index}
-                className="border-b hover:bg-gradient-to-r hover:from-[#1E40AF] hover:via-[#1D4ED8] hover:to-[#2563EB] hover:text-white transition-colors duration-200"
+                className="border-b hover:bg-white hover:text-black transition-colors duration-200"
               >
                 <td className="py-4 px-6">{job.title}</td>
                 <td className="py-4 px-6">{job.company}</td>

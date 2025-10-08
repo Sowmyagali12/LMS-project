@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { StudentContext } from "../context/StudentContext";
+import { FaBell, FaChartLine, FaBullhorn } from "react-icons/fa";
 
 const Navbar = ({ notifications }) => {
   const { student } = useContext(StudentContext);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const profileRef = useRef();
   const notifRef = useRef();
   const navigate = useNavigate();
@@ -32,44 +32,67 @@ const Navbar = ({ notifications }) => {
   return (
     <div className="w-full bg-white shadow-md sticky top-0 z-10">
       <div className="flex justify-between items-center px-6 py-3">
-        {/* Hamburger menu */}
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 rounded hover:bg-gray-100 transition"
-          >
-            ☰
-          </button>
+
+        {/* Left side: Blank */}
+        <div className="flex items-center space-x-3">
+          {/* intentionally blank */}
         </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-4">
+        {/* Right side: Icons + Profile */}
+        <div className="flex items-center space-x-5">
+
+          {/* Updates Icon */}
+          <button
+            onClick={() => navigate("/dashboard/updates")}
+            className="p-2 rounded-full hover:bg-blue-50 transition"
+            title="Updates"
+          >
+            <FaBullhorn className="text-blue-600 text-xl" />
+          </button>
+
+          {/* Weekly Progress Icon */}
+          <button
+            onClick={() => navigate("/dashboard/weekly-progress")}
+            className="p-2 rounded-full hover:bg-blue-50 transition"
+            title="Weekly Progress"
+          >
+            <FaChartLine className="text-blue-600 text-xl" />
+          </button>
+
           {/* Notifications */}
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setNotifOpen(!notifOpen)}
-              className="relative p-2 rounded-full hover:bg-gray-100 transition"
+              className="relative p-2 rounded-full hover:bg-blue-50 transition"
+              title="Notifications"
             >
-              🔔
-              <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+              <FaBell className="text-blue-600 text-xl" />
+              {notifications?.length > 0 && (
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+              )}
             </button>
+
             {notifOpen && (
-              <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md p-3 z-50">
-                <h4 className="font-semibold mb-2">Notifications</h4>
-                {notifications.length > 0
-                  ? notifications.map((n, idx) => (
-                      <p key={idx} className="text-sm mb-1">{n.message}</p>
-                    ))
-                  : <p className="text-sm text-gray-500">No new notifications</p>}
+              <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md p-3 z-50 border border-blue-100">
+                <h4 className="font-semibold mb-2 text-gray-700">Notifications</h4>
+                {notifications?.length > 0 ? (
+                  notifications.map((n, idx) => (
+                    <p key={idx} className="text-sm mb-1 text-gray-600">
+                      {n.message}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-sm text-gray-500">No new notifications</p>
+                )}
               </div>
             )}
           </div>
 
-          {/* Profile */}
+          {/* Profile Dropdown */}
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => setProfileOpen(!profileOpen)}
-              className="flex items-center space-x-2 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition shadow-sm"
+              className="flex items-center space-x-2 px-3 py-2 bg-blue-50 rounded-lg hover:bg-blue-100 transition shadow-sm"
             >
               <img
                 src={avatar}
@@ -81,7 +104,7 @@ const Navbar = ({ notifications }) => {
             </button>
 
             {profileOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-xl p-4 z-50 border border-gray-200">
+              <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-xl p-4 z-50 border border-blue-100">
                 <div className="flex items-center gap-3 mb-3">
                   <img
                     src={avatar}
@@ -90,25 +113,27 @@ const Navbar = ({ notifications }) => {
                   />
                   <div>
                     <p className="font-semibold text-gray-800">{name}</p>
-                    <p className="text-sm text-gray-500">{city}, {state}</p>
+                    <p className="text-sm text-gray-500">
+                      {city}, {state}
+                    </p>
                   </div>
                 </div>
                 <hr className="my-2 border-gray-200" />
                 <button
                   onClick={() => navigate("/profile")}
-                  className="w-full text-left px-2 py-2 rounded hover:bg-gray-100 transition"
+                  className="w-full text-left px-2 py-2 rounded hover:bg-blue-50 transition"
                 >
                   Profile
                 </button>
                 <button
                   onClick={() => navigate("/settings")}
-                  className="w-full text-left px-2 py-2 rounded hover:bg-gray-100 transition"
+                  className="w-full text-left px-2 py-2 rounded hover:bg-blue-50 transition"
                 >
                   Settings
                 </button>
                 <button
                   onClick={() => navigate("/logout")}
-                  className="w-full text-left px-2 py-2 rounded hover:bg-gray-100 transition"
+                  className="w-full text-left px-2 py-2 rounded hover:bg-blue-50 transition"
                 >
                   Logout
                 </button>

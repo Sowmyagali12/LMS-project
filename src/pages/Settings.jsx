@@ -1,84 +1,76 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaCog, FaSun, FaMoon } from "react-icons/fa";
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState("profile");
+  const [theme, setTheme] = useState("light"); // default light mode
 
-  const tabs = [
-    { id: "profile", label: "Profile" },
-    { id: "account", label: "Account" },
-    { id: "security", label: "Security" },
-  ];
+  // Load saved theme from localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) setTheme(savedTheme);
+  }, []);
+
+  // Apply theme to document and save to localStorage
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   return (
-    <div className="min-h-screen p-8 bg-gray-50 font-sans">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Settings</h1>
+    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white dark:bg-gray-800 shadow-md p-6 flex flex-col gap-6 transition-colors duration-500">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Settings</h1>
 
-      {/* Tabs */}
-      <div className="flex border-b border-gray-200 mb-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 -mb-px font-medium text-gray-700 transition ${
-              activeTab === tab.id
-                ? "border-b-2 border-blue-600 text-blue-600"
-                : "hover:text-gray-900"
+        <div className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-2">
+            <FaCog /> Theme Mode
+          </h2>
+
+          {/* Toggle Switch */}
+          <div
+            onClick={toggleTheme}
+            className={`w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+              theme === "light" ? "bg-gray-300" : "bg-blue-500"
             }`}
           >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+            <div
+              className={`bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center text-yellow-500 ${
+                theme === "light" ? "translate-x-0" : "translate-x-8"
+              }`}
+            >
+              {theme === "light" ? <FaSun size={14} /> : <FaMoon size={14} />}
+            </div>
+          </div>
+        </div>
+      </aside>
 
-      {/* Tab Content */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        {activeTab === "profile" && (
-          <motion.div
-            key="profile"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Profile Settings
-            </h2>
-            <p className="text-gray-600 text-sm">
-              Update your personal information here.
-            </p>
-          </motion.div>
-        )}
-        {activeTab === "account" && (
-          <motion.div
-            key="account"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Account Settings
-            </h2>
-            <p className="text-gray-600 text-sm">
-              Manage your account preferences and details.
-            </p>
-          </motion.div>
-        )}
-        {activeTab === "security" && (
-          <motion.div
-            key="security"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Security Settings
-            </h2>
-            <p className="text-gray-600 text-sm">
-              Change your password and enable two-factor authentication.
-            </p>
-          </motion.div>
-        )}
-      </div>
+      {/* Content */}
+      <main className="flex-1 p-8 transition-colors duration-500">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm min-h-[300px] transition-colors duration-500">
+          <AnimatePresence exitBeforeEnter>
+            <motion.div
+              key={theme}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                {theme === "light" ? "Light Mode Active" : "Dark Mode Active"}
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                Toggle between light and dark themes dynamically. Your selection will be remembered even if you reload the page.
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </main>
     </div>
   );
 };

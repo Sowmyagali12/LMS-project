@@ -1,21 +1,24 @@
-// src/context/StudentContext.jsx
+// context/StudentContext.js
 import React, { createContext, useState } from "react";
 
-// Create the context
-const StudentContext = createContext();
+export const StudentContext = createContext();
 
-// Create the provider
-const StudentProvider = ({ children }) => {
+export const StudentProvider = ({ children }) => {
   const [student, setStudent] = useState({
-    name: "gurram",
-    email: "gurram@example.com",
+    name: "John Doe",           // ✅ Make sure this key is `name`
+    avatar: "/default-avatar.png",
+    email: "john@example.com",
     phone: "1234567890",
-    currentCity: "Hyderabad",
-    currentState: "Telangana",
-    education: "B.Tech CSE",
-    skills: ["React", "Node.js"],
-    about: "I love coding!",
-    avatar: "https://via.placeholder.com/150",
+    whatsapp: "1234567890",
+    dob: "2000-01-01",
+    gender: "Male",
+    address: "123, Main Street",
+    skills: [],
+    about: "Hello! I am a student",
+    education: "B.Sc Computer Science",
+    currentCity: "City",
+    currentState: "State",
+    resume: null,
   });
 
   return (
@@ -24,6 +27,3 @@ const StudentProvider = ({ children }) => {
     </StudentContext.Provider>
   );
 };
-
-// ✅ Export BOTH the context and the provider as named exports
-export { StudentContext, StudentProvider };
